@@ -23,11 +23,13 @@ pyproject = "*"
 flake8 = "*"
 flake8-docstrings = "*"
 twine = "*"
+pypi-attestations = "*"
 
 [scripts]
 lint = "flake8 --statistics --show-source --color always --max-line-length 100 --docstring-convention numpy --ignore=D401 ."
 build = "python3 -m build"
 upload = "twine upload dist/*"
+sign = "pypi-attestations sign dist/*"
 install = "python3 -m pip install ."
 stubs = "stubgen -p vim_eof_comment -o ."
 
