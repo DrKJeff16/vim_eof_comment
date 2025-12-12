@@ -1,0 +1,9 @@
+from .comments import Comments as Comments
+from .util import die as die, error as error
+from io import TextIOWrapper
+
+COMMENTS: dict[str, str]
+
+def bootstrap_paths(paths: tuple[str], exts: tuple[str]) -> tuple[tuple[str, str]]: ...
+def open_batch_paths(paths: tuple[tuple[str, str]]) -> dict[str, tuple[TextIOWrapper, str]]: ...
+def modify_file(file: TextIOWrapper, ext: str) -> str: ...

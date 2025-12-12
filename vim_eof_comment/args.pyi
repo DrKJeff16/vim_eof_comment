@@ -1,0 +1,6 @@
+from .util import die as die
+from argparse import ArgumentParser, Namespace
+from typing import Any
+
+def bootstrap_args(parser: ArgumentParser, specs: tuple[tuple[list[str], dict[str, Any]]]) -> Namespace: ...
+def arg_parser_init() -> tuple[ArgumentParser, Namespace]: ...

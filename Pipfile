@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+setuptools = "*"
+wheel = "*"
+argparse = "*"
+typing = "*"
+typing-extensions = "*"
+pyproject = "*"
+
+[dev-packages]
+pynvim = "*"
+python-lsp-server = {extras = ["all"], version = "*"}
+mypy = "*"
+mypy-extensions = "*"
+build = "*"
+pip = "*"
+pyproject = "*"
+flake8 = "*"
+flake8-docstrings = "*"
+
+[scripts]
+lint = "flake8"
+
+[requires]
+python_version = "3.13"

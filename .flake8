@@ -1,0 +1,20 @@
+[flake8]
+exclude =
+    .tox
+    .git,
+    *staticfiles*,
+    locale,
+    docs,
+    tools,
+    venv,
+    .venv,
+    *migrations*,
+    *.pyc,
+    .git,
+    __pycache__,
+    test_*.py
+max-line-length = 100
+show-source = True
+statistics = True
+count = True
+import-order-style = pep8
