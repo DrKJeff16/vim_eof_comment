@@ -1,8 +1,11 @@
 # vim-eof-comment
 
-Ensure Vim EOF comments in given files.
+![GitHub Repo stars](https://img.shields.io/github/stars/DrKJeff16/vim-eof-comment?style=flat-square)![GitHub Release](https://img.shields.io/github/v/release/DrKJeff16/vim-eof-comment?include_prereleases&sort=semver&display_name=release&style=flat-square)
 
 [PyPI Package][pypi] | [Source Code][source]
+
+Ensure Vim EOF comments in given files.
+
 
 ---
 
