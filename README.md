@@ -5,7 +5,7 @@ Ensure Vim EOF comments in given files.
 ## Install
 
 ```sh
-pip install vim_eof_comments
+pip install vim_eof_comment
 ```
 
 ## Usage
