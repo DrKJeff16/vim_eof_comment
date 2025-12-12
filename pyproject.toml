@@ -11,14 +11,16 @@ maintainers = [
     {name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com"}
 ]
 description = "Adds Vim EOF comments for given filetypes in given directories"
-version = "0.1.6"
+version = "0.1.8"
 requires-python = ">=3.10"
 license = "GPL-2.0-only"
 readme = "README.md"
 dependencies = [
     "setuptools",
+    "wheel",
+    "typing",
     "argparse",
-    "typing"
+    "python-gettext"
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",

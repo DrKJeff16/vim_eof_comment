@@ -10,6 +10,7 @@ argparse = "*"
 typing = "*"
 typing-extensions = "*"
 pyproject = "*"
+python-gettext = "*"
 
 [dev-packages]
 pynvim = "*"
@@ -25,6 +26,9 @@ twine = "*"
 
 [scripts]
 lint = "flake8"
+build = "python3 -m build"
+upload = "twine upload dist/*"
+install = "python3 -m pip install ."
 
 [requires]
 python_version = "3.13"
