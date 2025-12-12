@@ -25,10 +25,11 @@ flake8-docstrings = "*"
 twine = "*"
 
 [scripts]
-lint = "flake8"
+lint = "flake8 --statistics --show-source --color always --max-line-length 100 --docstring-convention numpy --ignore=D401 ."
 build = "python3 -m build"
 upload = "twine upload dist/*"
 install = "python3 -m pip install ."
+stubs = "stubgen -p vim_eof_comment -o ."
 
 [requires]
 python_version = "3.13"
