@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name="vim_eof_comment"
+name="vim-eof-comment"
 authors = [
     {name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com"}
 ]
@@ -34,7 +34,7 @@ classifiers = [
 ]
 
 [project.scripts]
-vim-eof-comment = "vim_eof_comment.eof:main"
+vim-eof-comment = "vim-eof-comment.eof:main"
 
 [project.urls]
 Homepage = "https://github.com/DrKJeff16/vim-eof-comment"
