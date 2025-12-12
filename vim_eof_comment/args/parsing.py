@@ -4,15 +4,16 @@
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from argparse import ArgumentError, ArgumentParser, Namespace
+from argparse import ArgumentError, Namespace
 from sys import stdout as STDOUT
 from typing import Any, Dict, List, Tuple
 
-from .util import die
+from ..util import die
+from .color import ColorArgParser
 
 
 def bootstrap_args(
-        parser: ArgumentParser,
+        parser: ColorArgParser,
         specs: Tuple[Tuple[List[str], Dict[str, Any]]]
 ) -> Namespace:
     """Bootstraps the program arguments."""
@@ -30,9 +31,9 @@ def bootstrap_args(
     return namespace
 
 
-def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
+def arg_parser_init() -> Tuple[ColorArgParser, Namespace]:
     """Generates the argparse namespace."""
-    parser = ArgumentParser(
+    parser = ColorArgParser(
         prog="ensure_eof_comment.py",
         description="Checks for Vim EOF comments in all matching files in specific directories",
         exit_on_error=False

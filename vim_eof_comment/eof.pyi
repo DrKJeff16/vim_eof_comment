@@ -1,4 +1,4 @@
-from .args import arg_parser_init as arg_parser_init
+from .args.parsing import arg_parser_init as arg_parser_init
 from .comments import Comments as Comments
 from .file import bootstrap_paths as bootstrap_paths, modify_file as modify_file, open_batch_paths as open_batch_paths
 from .util import die as die

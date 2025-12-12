@@ -11,7 +11,7 @@ maintainers = [
     {name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com"}
 ]
 description = "Adds Vim EOF comments for given filetypes in given directories"
-version = "0.1.5"
+version = "0.1.6"
 requires-python = ">=3.10"
 license = "GPL-2.0-only"
 readme = "README.md"
@@ -34,7 +34,7 @@ classifiers = [
 ]
 
 [project.scripts]
-vim-eof-comment = "vim-eof-comment.eof:main"
+vim-eof-comment = "vim_eof_comment.eof:main"
 
 [project.urls]
 Homepage = "https://github.com/DrKJeff16/vim-eof-comment"

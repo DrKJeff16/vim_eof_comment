@@ -9,7 +9,7 @@ from typing import Dict, NoReturn, Tuple
 
 from .comments import Comments
 from .file import modify_file, bootstrap_paths, open_batch_paths
-from .args import arg_parser_init
+from .args.parsing import arg_parser_init
 from .util import die
 
 
@@ -18,7 +18,14 @@ COMMENTS = Comments(lua=(4, True), md=(2, True), py=(4, True)).generate()
 
 def get_last_line(file: TextIOWrapper) -> str:
     """Returns the last line of a file."""
-    result: str = file.read().split("\n")[-2]
+    data = file.read().split("\n")
+    if len(data) == 1:
+        result: str = data[0]
+    elif len(data) >= 2:
+        result: str = data[-2]
+    else:
+        result = ""
+
     file.close()
 
     return result
