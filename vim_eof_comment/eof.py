@@ -43,7 +43,8 @@ def eof_comment_search(
     result = dict()
     comment_map = comments.generate()
     for path, file in files.items():
-        file_obj, ext = file["file"], file["ext"]
+        file_obj: TextIOWrapper = file["file"]
+        ext: str = file["ext"]
 
         wrapper = get_last_line(file_obj)
         last_line, has_nwl = wrapper["line"], wrapper["has_nwl"]

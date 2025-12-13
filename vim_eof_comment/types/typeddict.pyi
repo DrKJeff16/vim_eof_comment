@@ -1,6 +1,5 @@
 from io import TextIOWrapper
-from typing import Any
-from typing_extensions import TypedDict
+from typing import Any, TypedDict
 
 class ParserSpec(TypedDict):
     opts: list[str]
@@ -15,7 +14,7 @@ class IndentMap(TypedDict):
 
 class IndentHandler(TypedDict):
     ext: str
-    level: int
+    level: str
     expandtab: bool
 
 class IOWrapperBool(TypedDict):

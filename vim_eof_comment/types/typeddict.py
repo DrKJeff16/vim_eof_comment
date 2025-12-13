@@ -7,24 +7,67 @@ Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 from io import TextIOWrapper
 from typing import Any, Dict, List, TypedDict
 
-ParserSpec = TypedDict("ParserSpec", {"opts": List[str], "kwargs": Dict[str, Any]})
 
-CommentMap = TypedDict("CommentMap", {"level": int})
+class ParserSpec(TypedDict):
+    """A TypeDict container."""
 
-IndentMap = TypedDict("IndentMap", {"level": int, "expandtab": bool})
+    opts: List[str]
+    kwargs: Dict[str, Any]
 
-IndentHandler = TypedDict("IndentHandler", {"ext": str, "level": int, "expandtab": bool})
 
-IOWrapperBool = TypedDict("IOWrapperBool", {"file": TextIOWrapper, "has_nwl": bool})
-LineBool = TypedDict("LineBool", {"line": str, "has_nwl": bool})
+class CommentMap(TypedDict):
+    """A TypeDict container."""
 
-BatchPathDict = TypedDict("BatchPathDict", {"file": TextIOWrapper, "ext": str})
+    level: int
 
-BatchPairDict = TypedDict("BatchPairDict", {"fpath": str, "ext": str})
 
-EOFCommentSearch = TypedDict("EOFCommentSearch", {
-    "state": IOWrapperBool,
-    "lang": str,
-})
+class IndentMap(TypedDict):
+    """A TypeDict container."""
+
+    level: int
+    expandtab: bool
+
+
+class IndentHandler(TypedDict):
+    """A TypeDict container."""
+
+    ext: str
+    level: str
+    expandtab: bool
+
+
+class IOWrapperBool(TypedDict):
+    """A TypeDict container."""
+
+    file: TextIOWrapper
+    has_nwl: bool
+
+
+class LineBool(TypedDict):
+    """A TypeDict container."""
+
+    line: str
+    has_nwl: bool
+
+
+class BatchPathDict(TypedDict):
+    """A TypeDict container."""
+
+    file: TextIOWrapper
+    ext: str
+
+
+class BatchPairDict(TypedDict):
+    """A TypeDict container."""
+
+    fpath: str
+    ext: str
+
+
+class EOFCommentSearch(TypedDict):
+    """A TypeDict container."""
+
+    state: IOWrapperBool
+    lang: str
 
 # vim:ts=4:sts=4:sw=4:et:ai:si:sta:

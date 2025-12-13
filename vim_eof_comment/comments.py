@@ -4,7 +4,7 @@
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from typing import Dict, NoReturn, ReadOnly
+from typing import Dict, Iterator, NoReturn, ReadOnly
 
 from .types.typeddict import IndentMap
 
@@ -93,6 +93,11 @@ class Comments():
             self.langs[lang] = {"level": indent, "expandtab": expandtab}
 
         self.fill_langs()
+
+    def __iter__(self) -> Iterator[str]:
+        """Iterate through comment langs."""
+        for k, v in self.langs.items():
+            yield (k, v)
 
     def is_available(self, lang: str) -> bool:
         """Checks if a given lang is available within the class."""

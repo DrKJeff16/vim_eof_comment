@@ -1,18 +1,19 @@
 [flake8]
 exclude =
-    .tox
-    .git,
+    *.pyc,
+    *.pyi,
+    *migrations*,
     *staticfiles*,
-    locale,
+    .git,
+    .tox
+    .venv,
+    __pycache__,
+    build,
     docs,
+    locale,
+    test_*.py
     tools,
     venv,
-    .venv,
-    *migrations*,
-    *.pyc,
-    .git,
-    __pycache__,
-    test_*.py
 max-line-length = 100
 show-source = True
 statistics = True

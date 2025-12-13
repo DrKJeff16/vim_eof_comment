@@ -3,13 +3,18 @@
 all: help
 
 clean:
-	@rm -rf build dist *.egg-info
+	@rm -rfv build dist *.egg-info
+
+distclean: clean
+	@rm -rfv .mypy_cache .ropeproject
 
 help:
 	@echo -e "Available targets:\n  help\n  lint\n  build\n  sign\n  local-install\n  stubs\n  run-script\n  upload\n  clean\n"
 
 lint:
-	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 .
+	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 \
+		--exclude .tox,.git,*staticfiles*,build,locale,docs,tools,venv,.venv,*migrations*,*.pyc,*.pyi,__pycache__,test_*.py \
+		.
 
 stubs:
 	@stubgen -p vim_eof_comment -o .
