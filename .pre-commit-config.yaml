@@ -17,10 +17,10 @@ repos:
         files: ^vim_eof_comment/.*\.py$
         entry: make lint
         verbose: true
-      - id: stubgen
-        name: Run stubgen
+      - id: run_script
+        name: Install and Run Script Locally
         language: system
         types: [python]
         files: ^vim_eof_comment/.*\.py$
-        entry: make stubs
+        entry: make run-script
         verbose: true
