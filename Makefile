@@ -11,14 +11,14 @@ help:
 lint:
 	@flake8 --statistics --show-source --color=always --max-line-length=100 --docstring-convention=numpy --ignore=D401 .
 
-build: clean
+build: clean stubs
 	@command python -m build &> /dev/null
 
 sign: build
 	@pypi-attestations sign dist/*
 
 stubs:
-	@stubgen .
+	@stubgen -p vim_eof_comment -o .
 
 local-install:
 	@pipenv run python3 -m pip install .
