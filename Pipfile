@@ -10,7 +10,6 @@ argparse = "*"
 typing = "*"
 typing-extensions = "*"
 pyproject = "*"
-python-gettext = "*"
 
 [dev-packages]
 pynvim = "*"
@@ -26,7 +25,8 @@ lint = "flake8 --statistics --show-source --color always --max-line-length 100 -
 build = "python3 -m build"
 upload = "twine upload dist/*"
 sign = "pypi-attestations sign dist/*"
-install = "python3 -m pip install ."
+local-install = "python3 -m pip install ."
+install = "python3 -m pip install"
 stubs = "stubgen -p vim_eof_comment -o ."
 
 [requires]
