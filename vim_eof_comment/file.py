@@ -53,7 +53,13 @@ def modify_file(
 ) -> str:
     """Modifies a file containing a bad EOF comment."""
     data = file.read().split("\n")
-    data[-2] = comments[ext]
+    data_len = len(data)
+    if data_len == 0:
+        data = [comments[ext], ""]
+    elif data_len == 1:
+        data.insert(0, comments[ext])
+    elif data_len >= 2:
+        data[-2] = comments[ext]
 
     if newline and not has_nwl:
         data.insert(-2, "")  # Newline
