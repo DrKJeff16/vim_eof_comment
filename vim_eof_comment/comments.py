@@ -20,15 +20,15 @@ _formats: Dict[str, str] = {
     "h": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
     "hh": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
     "hpp": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "htm": "<!--vim:ts={}:sts={}:sw={}:et:ai:si:sta:-->",
-    "html": "<!--vim:ts={}:sts={}:sw={}:et:ai:si:sta:-->",
+    "htm": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
+    "html": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
     "lua": "-- vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "markdown": "<!--vim:ts={}:sts={}:sw={}:et:ai:si:sta:-->",
-    "md": "<!--vim:ts={}:sts={}:sw={}:et:ai:si:sta:-->",
+    "markdown": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
+    "md": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
     "py": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
     "pyi": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
     "sh": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "xml": "<!--vim:ts={}:sts={}:sw={}:et:ai:si:sta:-->",
+    "xml": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
     "zsh": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
 }
 
@@ -70,12 +70,13 @@ class Comments():
     langs: Dict[str, IndentMap]
     __DEFAULT: Dict[str, IndentMap] = _DEFAULT.copy()
 
-    def __init__(self, mappings: Optional[Dict[str, IndentMap]] = _DEFAULT):
+    def __init__(self, mappings: Optional[Dict[str, IndentMap]] = None):
         """Creates a new Vim EOF comment object."""
         self.formats = _formats.copy()
 
-        if len(mappings) == 0:
+        if mappings is None or len(mappings) == 0:
             self.langs = self.__DEFAULT.copy()
+            self.__fill_langs()
             return
 
         self.langs = dict()

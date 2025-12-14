@@ -12,7 +12,7 @@ class Comments:
     formats: dict[str, str]
     langs: dict[str, IndentMap]
     __DEFAULT: dict[str, IndentMap]
-    def __init__(self, mappings: dict[str, IndentMap] | None = ...) -> None:
+    def __init__(self, mappings: dict[str, IndentMap] | None = None) -> None:
         """Creates a new Vim EOF comment object."""
     def __iter__(self) -> Iterator[str]:
         """Iterate through comment langs."""
