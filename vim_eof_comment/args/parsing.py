@@ -24,6 +24,7 @@ def bootstrap_args(
         namespace: Namespace = parser.parse_args()
     except ArgumentError:
         die(code=1, func=parser.print_usage)
+
     return namespace
 
 

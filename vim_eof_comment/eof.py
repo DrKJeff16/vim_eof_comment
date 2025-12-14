@@ -9,29 +9,10 @@ from typing import Dict, List, NoReturn, Tuple
 
 from .args.parsing import arg_parser_init, indent_handler
 from .comments import Comments
-from .file import bootstrap_paths, modify_file, open_batch_paths
+from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
-                              IOWrapperBool, LineBool)
+                              IOWrapperBool)
 from .util import die, gen_indent_maps
-
-
-def get_last_line(file: TextIOWrapper) -> LineBool:
-    """Returns the last line of a file."""
-    data: List[str] = file.read().split("\n")
-    has_newline = False
-    if len(data) == 1:
-        line: str = data[0]
-    elif len(data) >= 2:
-        if len(data) >= 3:
-            has_newline = data[-3] == ""
-
-        line: str = data[-2]
-    else:
-        line = ""
-
-    file.close()
-
-    return LineBool(line=line, has_nwl=has_newline)
 
 
 def eof_comment_search(

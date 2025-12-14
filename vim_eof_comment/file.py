@@ -9,7 +9,7 @@ from os import walk
 from os.path import isdir, join
 from typing import Dict, List, Tuple
 
-from .types.typeddict import BatchPairDict, BatchPathDict
+from .types.typeddict import BatchPairDict, BatchPathDict, LineBool
 from .util import die, error
 
 
@@ -73,5 +73,24 @@ def modify_file(
         data.insert(-2, "")  # Newline
 
     return "\n".join(data)
+
+
+def get_last_line(file: TextIOWrapper) -> LineBool:
+    """Returns the last line of a file."""
+    data: List[str] = file.read().split("\n")
+    has_newline = False
+    if len(data) == 1:
+        line: str = data[0]
+    elif len(data) >= 2:
+        if len(data) >= 3:
+            has_newline = data[-3] == ""
+
+        line: str = data[-2]
+    else:
+        line = ""
+
+    file.close()
+
+    return LineBool(line=line, has_nwl=has_newline)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:
