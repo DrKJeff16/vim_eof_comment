@@ -58,6 +58,8 @@ def modify_file(
 ) -> str:
     """Modifies a file containing a bad EOF comment."""
     data: List[str] = file.read().split("\n")
+    file.close()
+
     data_len = len(data)
     comment = comments[ext]
     if data_len == 0:

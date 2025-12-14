@@ -69,7 +69,7 @@ def append_eof_comment(
         has_nwl, file_obj, ext = file["state"]["has_nwl"], file["state"]["file"], file["lang"]
 
         txt = modify_file(file_obj, comment_map, ext, newline, has_nwl)
-        file_obj = open(path, "w" if has_nwl else "a")
+        file_obj = open(path, "w")
 
         file_obj.write(txt)
         file_obj.close()
