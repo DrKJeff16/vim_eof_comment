@@ -9,27 +9,27 @@ from typing import Dict, Iterator, NoReturn, Optional
 from .types.typeddict import IndentMap
 
 _formats: Dict[str, str] = {
-    "C": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "H": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "bash": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "c": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "cc": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "cpp": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "css": "/* vim:ts={}:sts={}:sw={}:et:ai:si:sta: */",
-    "fish": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "h": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "hh": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "hpp": "/// vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "htm": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
-    "html": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
-    "lua": "-- vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "markdown": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
-    "md": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
-    "py": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "pyi": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "sh": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
-    "xml": "<!-- vim:ts={}:sts={}:sw={}:et:ai:si:sta: -->",
-    "zsh": "# vim:ts={}:sts={}:sw={}:et:ai:si:sta:",
+    "C": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "H": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "bash": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "c": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "cc": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "cpp": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "css": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "fish": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "h": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "hh": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "hpp": "/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    "htm": "<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    "html": "<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    "lua": "-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "markdown": "<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    "md": "<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    "py": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "pyi": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "sh": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
+    "xml": "<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    "zsh": "# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
 }
 
 _DEFAULT: Dict[str, IndentMap] = {
@@ -117,22 +117,14 @@ class Comments():
         """Generate the comments list."""
         comments: Dict[str, str] = dict()
         for lang, fmt in self.formats.items():
-            splitted = fmt.split(":")
             lvl, expandtab = self.langs[lang]["level"], self.langs[lang]["expandtab"]
+            et, sw = "noet", 0
 
-            et = splitted.index("et")
-            ts = splitted.index("ts={}")
-            sts = splitted.index("sts={}")
-            sw = splitted.index("sw={}")
+            if expandtab:
+                et, sw = "et", lvl
 
-            splitted[et] = "et" if expandtab else "noet"
-            for idx in (ts, sts):
-                splitted[idx] = splitted[idx].format(lvl)
-
-            splitted[sw] = splitted[sw].format(lvl if splitted[et] == "et" else 0)
-
-            comments[lang] = ":".join(splitted)
+            comments[lang] = fmt.format(ts=lvl, sts=lvl, sw=sw, et=et)
 
         return comments
 
-# vim:ts=4:sts=4:sw=4:et:ai:si:sta:
+# vim: set ts=4 sts=4 sw=4 et ai si sta:

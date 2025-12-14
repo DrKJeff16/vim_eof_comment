@@ -18,5 +18,4 @@ def arg_parser_init() -> tuple[ArgumentParser, Namespace]:
     """Generates the argparse namespace."""
 def indent_handler(indent: str) -> list[IndentHandler]:
     """Parse indent levels defined by the user."""
-
-# vim:ts=4:sts=4:sw=4:et:ai:si:sta:
+# vim: set ts=4 sts=4 sw=4 et ai si sta:

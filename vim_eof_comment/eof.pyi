@@ -30,5 +30,4 @@ def append_eof_comment(files: dict[str, EOFCommentSearch], comments: Comments, n
     """Append EOF comment to files missing it."""
 def main() -> int:
     """Execute main workflow."""
-
-# vim:ts=4:sts=4:sw=4:et:ai:si:sta:
+# vim: set ts=4 sts=4 sw=4 et ai si sta:
