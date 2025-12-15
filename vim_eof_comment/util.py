@@ -82,6 +82,18 @@ def die(
     Exit(code)
 
 
+def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
+    """Only print if verbose mode is activated."""
+    end: str = kwargs.get("end", "\n")
+    sep: str = kwargs.get("sep", " ")
+    flush: bool = kwargs.get("flush", False)
+
+    if verbose is None or not verbose:
+        return
+
+    print(*msg, end=end, sep=sep, flush=flush)
+
+
 def gen_indent_maps(
         maps: List[IndentHandler]
 ) -> Dict[str, IndentMap] | None:

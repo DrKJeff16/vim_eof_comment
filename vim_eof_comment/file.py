@@ -79,15 +79,14 @@ def get_last_line(file: TextIOWrapper) -> LineBool:
     """Returns the last line of a file."""
     data: List[str] = file.read().split("\n")
     has_newline = False
+    line = ""
     if len(data) == 1:
-        line: str = data[0]
+        line = data[0]
     elif len(data) >= 2:
         if len(data) >= 3:
             has_newline = data[-3] == ""
 
         line: str = data[-2]
-    else:
-        line = ""
 
     file.close()
 

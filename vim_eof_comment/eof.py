@@ -7,22 +7,36 @@ Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 from io import TextIOWrapper
 from typing import Dict, List, NoReturn, Tuple
 
+from colorama import Fore, Style
+from colorama import init as color_init
+
 from .args.parsing import arg_parser_init, indent_handler
 from .comments import Comments
 from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
                               IOWrapperBool)
-from .util import die, gen_indent_maps
+from .util import die, gen_indent_maps, verbose_print
+
+
+_RED: int = Fore.LIGHTRED_EX
+_GREEN: int = Fore.LIGHTGREEN_EX
+_BRIGHT: int = Style.BRIGHT
+_RESET: int = Style.RESET_ALL
 
 
 def eof_comment_search(
         files: Dict[str, BatchPathDict],
         comments: Comments,
-        newline: bool
+        newline: bool,
+        verbose: bool
 ) -> Dict[str, EOFCommentSearch]:
     """Searches through opened files."""
     result = dict()
     comment_map = comments.generate()
+
+    color_init()
+
+    verbose_print(f"{_RESET}Analyzing files...\n", verbose=verbose)
     for path, file in files.items():
         file_obj: TextIOWrapper = file["file"]
         ext: str = file["ext"]
@@ -30,11 +44,15 @@ def eof_comment_search(
         wrapper = get_last_line(file_obj)
         last_line, has_nwl = wrapper["line"], wrapper["has_nwl"]
 
+        verbose_print(f"{_RESET} - {path} ==> ", verbose=verbose, end="", sep="")
         if last_line != comment_map[ext]:
-            # FIXME: This tuple only applies to Lua files!
-            state = IOWrapperBool(file=open(path, "r"), has_nwl=has_nwl)
-
-            result[path] = EOFCommentSearch(state=state, lang=ext)
+            verbose_print(f"{_BRIGHT}{_RED}CHANGED", verbose=verbose)
+            result[path] = EOFCommentSearch(
+                state=IOWrapperBool(file=open(path, "r"), has_nwl=has_nwl),
+                lang=ext
+            )
+        else:
+            verbose_print(f"{_BRIGHT}{_GREEN}OK", verbose=verbose)
 
     return result
 
@@ -64,6 +82,7 @@ def main() -> int:
     exts: Tuple[str] = tuple(namespace.exts.split(","))
     newline: bool = namespace.newline
     indent: List[IndentHandler] = indent_handler(namespace.indent)
+    verbose: bool = namespace.verbose
 
     indent = gen_indent_maps(indent.copy())
 
@@ -76,7 +95,7 @@ def main() -> int:
     if len(files) == 0:
         die("No matching files found!", code=1)
 
-    results = eof_comment_search(files, comments, newline)
+    results = eof_comment_search(files, comments, newline, verbose)
     if len(results) > 0:
         append_eof_comment(results, comments, newline)
 

@@ -63,6 +63,15 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             }
         },
         {
+            "opts": ["-v", "--verbose"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "Enable verbose mode",
+                "dest": "verbose",
+            }
+        },
+        {
             "opts": ["-i", "--indent-levels"],
             "kwargs": {
                 "required": False,

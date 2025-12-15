@@ -10,6 +10,7 @@ argparse = "*"
 typing = "*"
 typing-extensions = "*"
 pyproject = "*"
+colorama = "*"
 
 [dev-packages]
 pynvim = "*"
