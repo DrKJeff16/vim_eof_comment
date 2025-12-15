@@ -7,6 +7,8 @@ def die(*msg, code: int = 0, end: str = '\n', sep: str = ' ', flush: bool = Fals
     """Kill program execution."""
 def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
     """Only print if verbose mode is activated."""
+def version_print(version: str) -> NoReturn:
+    """Print project version, then exit."""
 def gen_indent_maps(maps: list[IndentHandler]) -> dict[str, IndentMap] | None:
     """Generate a dictionary from the custom indent maps."""
 

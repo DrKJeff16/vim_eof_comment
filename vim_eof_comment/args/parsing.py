@@ -45,6 +45,15 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             },
         },
         {
+            "opts": ["-V", "--version"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "Show version",
+                "dest": "version",
+            }
+        },
+        {
             "opts": ["-e", "--extensions"],
             "kwargs": {
                 "required": True,

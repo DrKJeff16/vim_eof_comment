@@ -94,6 +94,11 @@ def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
     print(*msg, end=end, sep=sep, flush=flush)
 
 
+def version_print(version: str) -> NoReturn:
+    """Print project version, then exit."""
+    die(f"vim-eof-comment: v{version}", code=0)
+
+
 def gen_indent_maps(
         maps: List[IndentHandler]
 ) -> Dict[str, IndentMap] | None:
