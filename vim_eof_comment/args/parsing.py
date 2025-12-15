@@ -45,7 +45,7 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             },
         },
         {
-            "opts": ["-e", "--file-extensions"],
+            "opts": ["-e", "--extensions"],
             "kwargs": {
                 "required": True,
                 "metavar": "EXT1[,EXT2[,EXT3[,...]]]",
@@ -72,10 +72,10 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             }
         },
         {
-            "opts": ["-i", "--indent-levels"],
+            "opts": ["-i"],
             "kwargs": {
                 "required": False,
-                "metavar": "EXT1:INDENT1[:<Y|N>][,EXT2:INDENT2[:<Y|N>][,...]]",
+                "metavar": "EXT1:INDENT1[:<Y|N>][,...]",
                 "help": """
                 A comma-separated list of per-extension mappings
                 (indent level and, optionally, a Y/N value to indicate if tabs are expanded).
