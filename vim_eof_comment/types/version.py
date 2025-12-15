@@ -32,6 +32,6 @@ class _VersionInfo():
         return f"{self.major}.{self.minor}.{self.patch}"
 
 
-version_info: _VersionInfo = _VersionInfo(0, 1, 32)
+version_info: _VersionInfo = _VersionInfo(0, 1, 33)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:
