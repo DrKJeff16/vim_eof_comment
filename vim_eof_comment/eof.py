@@ -15,9 +15,8 @@ from .comments import Comments
 from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
                               IOWrapperBool)
+from .types.version import version_info
 from .util import die, gen_indent_maps, verbose_print, version_print
-
-__VERSION__: str = "0.1.28"
 
 _RED: int = Fore.LIGHTRED_EX
 _GREEN: int = Fore.LIGHTGREEN_EX
@@ -87,7 +86,7 @@ def main() -> int:
     version: bool = namespace.version
 
     if version:
-        version_print(__VERSION__)
+        version_print(str(version_info))
 
     indent = gen_indent_maps(indent.copy())
 

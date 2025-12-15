@@ -11,12 +11,12 @@ from .types.typeddict import BatchPathDict as BatchPathDict
 from .types.typeddict import EOFCommentSearch as EOFCommentSearch
 from .types.typeddict import IndentHandler as IndentHandler
 from .types.typeddict import IOWrapperBool as IOWrapperBool
+from .types.version import version_info as version_info
 from .util import die as die
 from .util import gen_indent_maps as gen_indent_maps
 from .util import verbose_print as verbose_print
 from .util import version_print as version_print
 
-__VERSION__: str
 _RED: int
 _GREEN: int
 _BRIGHT: int
