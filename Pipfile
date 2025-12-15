@@ -22,6 +22,8 @@ pypi-attestations = "*"
 pre-commit = "*"
 flake8 = "*"
 flake8-pyi = "*"
+mypy = "*"
+mypy-extensions = "*"
 
 [scripts]
 lint = "flake8 --statistics --show-source --color always --max-line-length 100 --docstring-convention numpy --ignore=D401 ."

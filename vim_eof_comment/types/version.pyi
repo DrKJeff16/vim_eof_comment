@@ -17,4 +17,5 @@ class _VersionInfo:
         """Representate this object as a string."""
 
 version_info: _VersionInfo
+
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

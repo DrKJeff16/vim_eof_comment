@@ -7,6 +7,7 @@ from .file import bootstrap_paths as bootstrap_paths
 from .file import get_last_line as get_last_line
 from .file import modify_file as modify_file
 from .file import open_batch_paths as open_batch_paths
+from .regex import matches as matches
 from .types.typeddict import BatchPathDict as BatchPathDict
 from .types.typeddict import EOFCommentSearch as EOFCommentSearch
 from .types.typeddict import IndentHandler as IndentHandler

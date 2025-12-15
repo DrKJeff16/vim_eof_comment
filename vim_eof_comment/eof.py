@@ -13,6 +13,7 @@ from colorama import init as color_init
 from .args.parsing import arg_parser_init, indent_handler
 from .comments import Comments
 from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
+from .regex import matches
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
                               IOWrapperBool)
 from .types.version import version_info
@@ -44,12 +45,14 @@ def eof_comment_search(
         wrapper = get_last_line(file_obj)
         last_line, has_nwl = wrapper["line"], wrapper["has_nwl"]
 
+        verbose_print(f"Last Line `{path}`: `{last_line}`", verbose=verbose)
         verbose_print(f"{_RESET} - {path} ==> ", verbose=verbose, end="", sep="")
         if last_line != comment_map[ext]:
             verbose_print(f"{_BRIGHT}{_RED}CHANGED", verbose=verbose)
             result[path] = EOFCommentSearch(
                 state=IOWrapperBool(file=open(path, "r"), has_nwl=has_nwl),
-                lang=ext
+                lang=ext,
+                match=matches(last_line, verbose)
             )
         else:
             verbose_print(f"{_BRIGHT}{_GREEN}OK", verbose=verbose)
@@ -65,9 +68,19 @@ def append_eof_comment(
     """Append EOF comment to files missing it."""
     comment_map = comments.generate()
     for path, file in files.items():
-        has_nwl, file_obj, ext = file["state"]["has_nwl"], file["state"]["file"], file["lang"]
+        file_obj = file["state"]["file"]
+        has_nwl = file["state"]["has_nwl"]
+        matching = file["match"]
+        ext = file["lang"]
 
-        txt = modify_file(file_obj, comment_map, ext, newline, has_nwl)
+        txt = modify_file(
+            file_obj,
+            comment_map,
+            ext=ext,
+            newline=newline,
+            has_nwl=has_nwl,
+            matching=matching
+        )
         file_obj = open(path, "w")
 
         file_obj.write(txt)

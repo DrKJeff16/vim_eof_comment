@@ -54,7 +54,8 @@ def modify_file(
         comments: Dict[str, str],
         ext: str,
         newline: bool,
-        has_nwl: bool
+        has_nwl: bool,
+        matching: bool
 ) -> str:
     """Modifies a file containing a bad EOF comment."""
     data: List[str] = file.read().split("\n")
@@ -65,9 +66,15 @@ def modify_file(
     if data_len == 0:
         data = [comment, ""]
     elif data_len == 1:
-        data.insert(0, comment)
+        if matching:
+            data = [comment, ""]
+        else:
+            data.insert(0, comment)
     elif data_len >= 2:
-        data.insert(-1, comment)
+        if matching:
+            data[-2] = comment
+        else:
+            data.insert(-1, comment)
 
     if newline and not has_nwl:
         data.insert(-2, "")  # Newline
