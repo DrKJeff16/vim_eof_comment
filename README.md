@@ -30,6 +30,12 @@ General usage is as follows:
 vim-eof-comment [-h] [-v] [-V] -e EXT1[,EXT2[,EXT3[,...]]] [-i EXT1:INDENT[:Y/N][,...]] [-n] dir1 [dir2 [...]]
 ```
 
+You can also call it as a module:
+
+```bash
+python -m vim_eof_comment [-h] [-v] [-V] -e EXT1[,EXT2[,EXT3[,...]]] [-i EXT1:INDENT[:Y/N][,...]] [-n] dir1 [dir2 [...]]
+```
+
 ### Example
 
 ```bash
