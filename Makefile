@@ -6,13 +6,25 @@ clean:
 	@rm -rf build dist *.egg-info
 
 distclean: clean
-	@rm -rf .mypy_cache .ropeproject
+	@rm -rf .mypy_cache .ropeproject .pytest_cache
 
 docs:
 	$(MAKE) -C docs html
 
 help:
-	@echo -e "Available targets:\n  help\n  docs\n  lint\n  build\n  sign\n  local-install\n  stubs\n  run-script\n  upload\n  clean\n"
+	@echo -e "\nAvailable targets:"
+	@echo "  build"
+	@echo "  clean"
+	@echo "  distclean"
+	@echo "  docs"
+	@echo "  help"
+	@echo "  lint"
+	@echo "  local-install"
+	@echo "  run-script"
+	@echo "  sign"
+	@echo "  stubs"
+	@echo "  upload"
+	@echo
 
 lint:
 	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 \
