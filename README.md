@@ -27,7 +27,7 @@ pip install vim-eof-comment
 General usage is as follows:
 
 ```bash
-vim-eof-comment [-h] -e EXT1[,EXT2[,EXT3[,...]]] /path/to/dir1 [/path/to/dir2 [...]]
+vim-eof-comment [-h] [-v] [-V] -e EXT1[,EXT2[,EXT3[,...]]] [-i EXT1:INDENT[:Y/N][,...]] [-n] dir1 [dir2 [...]]
 ```
 
 ### Example
