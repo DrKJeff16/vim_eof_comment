@@ -24,6 +24,10 @@ flake8 = "*"
 flake8-pyi = "*"
 mypy = "*"
 mypy-extensions = "*"
+furo = "*"
+sphinx-rtd-theme = "*"
+renku-sphinx-theme = "*"
+sphinxawesome-theme = "*"
 
 [scripts]
 lint = "flake8 --statistics --show-source --color always --max-line-length 100 --docstring-convention numpy --ignore=D401 ."
