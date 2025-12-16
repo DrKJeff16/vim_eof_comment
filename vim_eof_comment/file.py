@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""File management utilities.
+"""
+File management utilities.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -14,7 +15,21 @@ from .util import die, error
 
 
 def bootstrap_paths(paths: Tuple[str], exts: Tuple[str]) -> List[BatchPairDict]:
-    """Bootstraps all the matching paths in current dir and below."""
+    """
+    Bootstraps all the matching paths in current dir and below.
+
+    Parameters
+    ----------
+    paths : array_like
+        A list of specified file paths.
+    exts : array_like
+        A list of specified file extensions.
+
+    Returns
+    -------
+    result : array_like
+        A list of BatchPairDict type objects.
+    """
     result = list()
     for path in paths:
         if not isdir(path):
@@ -33,7 +48,19 @@ def bootstrap_paths(paths: Tuple[str], exts: Tuple[str]) -> List[BatchPairDict]:
 
 
 def open_batch_paths(paths: List[BatchPairDict]) -> Dict[str, BatchPathDict]:
-    """Return a list of TextIO objects given file path strings."""
+    """
+    Return a list of TextIO objects given file path strings.
+
+    Parameters
+    ----------
+    paths : List[BatchPairDict]
+        A list of BatchPairDict type objects.
+
+    Returns
+    -------
+    result : Dict[str, BatchPathDict]
+        A string to BatchPathDict dictionary.
+    """
     result = dict()
     for path in paths:
         fpath, ext = path["fpath"], path["ext"]
@@ -57,7 +84,30 @@ def modify_file(
         has_nwl: bool,
         matching: bool
 ) -> str:
-    """Modifies a file containing a bad EOF comment."""
+    """
+    Modifies a file containing a bad EOF comment.
+
+    Parameters
+    ----------
+    file : TextIOWrapper
+        The file object to be read.
+    comments : Dict[str, str]
+        A filetype-to-comment dictionary.
+    ext : str
+        The filetype extension given by the user.
+    newline : bool
+        Flag to whether add a newline before the comment.
+    has_nwl : bool
+        Indicates whether the file already has a newline at the end
+        (not counting LF/CRLF line endings).
+    matching : bool
+        Indicates whether the file already has a matching EOF comment.
+
+    Returns
+    -------
+    str
+        The modified contents of the given file.
+    """
     data: List[str] = file.read().split("\n")
     file.close()
 
@@ -83,7 +133,19 @@ def modify_file(
 
 
 def get_last_line(file: TextIOWrapper) -> LineBool:
-    """Returns the last line of a file."""
+    """
+    Returns the last line of a file and indicates whether it already has a newline.
+
+    Parameters
+    ----------
+    file : TextIOWrapper
+        The file to retrieve the last line data from.
+
+    Returns
+    -------
+    last_line : LineBool
+        An object containing both the last line in a string and a boolean indicating a newline.
+    """
     data: List[str] = file.read().split("\n")
     has_newline = False
     line = ""

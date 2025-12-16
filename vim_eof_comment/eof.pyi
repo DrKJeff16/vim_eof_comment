@@ -24,10 +24,46 @@ _BRIGHT: int
 _RESET: int
 
 def eof_comment_search(files: dict[str, BatchPathDict], comments: Comments, newline: bool, verbose: bool) -> dict[str, EOFCommentSearch]:
-    """Searches through opened files."""
+    """
+    Searches through opened files.
+
+    Parameters
+    ----------
+    files : Dict[str, BatchPathDict]
+        A dictionary of `str` to `BatchPathDict` objects.
+    comments : Comments
+        The `Comments` object containing the hardcoded comments per file extension.
+    newline : bool
+        Indicates whether a newline should be added before the comment.
+    verbose : bool
+        Sets verbose mode.
+
+    Returns
+    -------
+    result : Dict[str, EOFCommentSearch]
+        A dictionary of `str` to `EOFCommentSearch` objects.
+    """
 def append_eof_comment(files: dict[str, EOFCommentSearch], comments: Comments, newline: bool) -> NoReturn:
-    """Append EOF comment to files missing it."""
+    """
+    Append a Vim EOF comment to files missing it.
+
+    Parameters
+    ----------
+    files : Dict[str, EOFCommentSearch]
+        A dictionary of `str` to `EOFCommentSearch` objects.
+    comments : Comments
+        The `Comments` object containing the hardcoded comments per file extension.
+    newline : bool
+        Indicates whether a newline should be added before the comment.
+    """
 def main() -> int:
-    """Execute main workflow."""
+    """
+    Execute the main workflow.
+
+    Returns
+    -------
+    int
+        The exit code for the program.
+    """
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

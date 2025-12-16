@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Ensure EOF Vim comments.
+"""
+Main entrypoint for `vim-eof-comment`.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """

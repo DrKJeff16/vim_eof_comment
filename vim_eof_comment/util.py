@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""EOF comments checker utilities.
+"""
+EOF comments checker utilities.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -13,7 +14,24 @@ from .types.typeddict import IndentHandler, IndentMap
 
 
 def error(*msg, end: str = "\n", sep: str = " ", flush: bool = False) -> NoReturn:
-    """Prints to stderr."""
+    r"""
+    Prints to stderr.
+
+    Parameters
+    ----------
+    *msg
+        The data to be printed to stderr.
+    end : str, default="\n", optional
+        The string to be printed when finishing all the data printing.
+    sep : str, default=" ", optional
+        The string to be printed between each data element to be printed.
+    flush : bool, default=False, optional
+        Forcefully makes the output file to be flushed.
+
+    See Also
+    --------
+    print : This function is essentially being wrapped around here.
+    """
     try:
         end = str(end)
     except KeyboardInterrupt:
@@ -46,7 +64,31 @@ def die(
         flush: bool = False,
         func: Callable[[TextIO], None] | None = None,
 ) -> NoReturn:
-    """Kill program execution."""
+    r"""
+    Kills program execution.
+
+    Summons sys.exit() with a provided code and optionally prints code to stderr or stdout
+    depending on the provuded exit code.
+
+    Parameters
+    ----------
+    *msg : optional
+        Data to be printed.
+    code : int, default=0
+        The exit code.
+    end : str, default="\n", optional
+        The string to be printed when finishing all the data printing.
+    sep : str, default=" ", optional
+        The string to be printed between each data element to be printed.
+    flush : bool, default=False, optional
+        Forcefully makes the output file to be flushed.
+    func : Callable[[TextIO], None], optional
+        A function to be called with a TextIO object if provided.
+
+    See Also
+    --------
+    vim_eof_comment.util.error : Function to be used if exit code is not 0.
+    """
     try:
         code = int(code)
     except Exception:
@@ -83,7 +125,22 @@ def die(
 
 
 def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
-    """Only print if verbose mode is activated."""
+    """
+    Only prints the given data if verbose mode is activated.
+
+    Parameters
+    ----------
+    *msg
+        Data to be printed.
+    verbose : bool or None, default=None
+        Flag to signal whether to execute this function or not.
+    **kwargs
+        Extra arguments for the `print()` function.
+
+    See Also
+    --------
+    print : This function is essentially being wrapped around here.
+    """
     end: str = kwargs.get("end", "\n")
     sep: str = kwargs.get("sep", " ")
     flush: bool = kwargs.get("flush", False)
@@ -95,14 +152,38 @@ def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
 
 
 def version_print(version: str) -> NoReturn:
-    """Print project version, then exit."""
+    """
+    Print project version, then exit.
+
+    version : str
+        The version string.
+
+    See Also
+    --------
+    vim_eof_comment.util.die : The function used for this function.
+    """
     die(f"vim-eof-comment-{version}", code=0)
 
 
-def gen_indent_maps(
-        maps: List[IndentHandler]
-) -> Dict[str, IndentMap] | None:
-    """Generate a dictionary from the custom indent maps."""
+def gen_indent_maps(maps: List[IndentHandler]) -> Dict[str, IndentMap] | None:
+    """
+    Generate a dictionary from the custom indent maps.
+
+    Parameters
+    ----------
+    maps : List[IndentHandler]
+        A list of IndentHandler objects.
+
+    Returns
+    -------
+    map_d : Dict[str, IndentMap]
+        The generated indent map dictionary.
+
+    Raises
+    ------
+    ValueError : This will happen if any element of the only parameter
+                  is less or equal to one.
+    """
     if len(maps) == 0:
         return None
 

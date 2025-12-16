@@ -5,9 +5,6 @@ from .types.typeddict import IndentMap as IndentMap
 _formats: dict[str, str]
 _DEFAULT: dict[str, IndentMap]
 
-class EOFCommentsError(Exception):
-    """EOF Comments error type."""
-
 class Comments:
     """Vim EOF comments class."""
     formats: dict[str, str]

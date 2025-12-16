@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Argument parsing.
+"""
+Argument parsing utilities for `vim-eof-comment`.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """

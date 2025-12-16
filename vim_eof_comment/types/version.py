@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Custom vim-eof-comment versioning objects.
+"""
+Custom vim-eof-comment versioning objects.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -12,9 +13,9 @@ class _VersionInfo():
 
     Attributes
     ----------
-        major: int
-        minor: int
-        patch: int
+    major : int
+    minor : int
+    patch : int
     """
 
     major: int
@@ -22,13 +23,31 @@ class _VersionInfo():
     patch: int
 
     def __init__(self, major: int, minor: int, patch: int):
-        """Initialize _VersionInfo object."""
+        """
+        Initialize _VersionInfo object.
+
+        Parameters
+        ----------
+        major : int
+            The major component of the version.
+        minor : int
+            The minor component of the version.
+        patch : int
+            The patch component of the version.
+        """
         self.major = major
         self.minor = minor
         self.patch = patch
 
     def __str__(self) -> str:
-        """Representate this object as a string."""
+        """
+        Representate this object as a string.
+
+        Returns
+        -------
+        str
+            The string representation of the instance.
+        """
         return f"{self.major}.{self.minor}.{self.patch}"
 
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Ensure EOF Vim comment in specific filetypes.
+"""
+Ensure EOF Vim comment in specific filetypes.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -31,8 +32,26 @@ def eof_comment_search(
         newline: bool,
         verbose: bool
 ) -> Dict[str, EOFCommentSearch]:
-    """Searches through opened files."""
-    result = dict()
+    """
+    Searches through opened files.
+
+    Parameters
+    ----------
+    files : Dict[str, BatchPathDict]
+        A dictionary of `str` to `BatchPathDict` objects.
+    comments : Comments
+        The `Comments` object containing the hardcoded comments per file extension.
+    newline : bool
+        Indicates whether a newline should be added before the comment.
+    verbose : bool
+        Sets verbose mode.
+
+    Returns
+    -------
+    result : Dict[str, EOFCommentSearch]
+        A dictionary of `str` to `EOFCommentSearch` objects.
+    """
+    result: Dict[str, EOFCommentSearch] = dict()
     comment_map = comments.generate()
 
     color_init()
@@ -65,7 +84,18 @@ def append_eof_comment(
         comments: Comments,
         newline: bool
 ) -> NoReturn:
-    """Append EOF comment to files missing it."""
+    """
+    Append a Vim EOF comment to files missing it.
+
+    Parameters
+    ----------
+    files : Dict[str, EOFCommentSearch]
+        A dictionary of `str` to `EOFCommentSearch` objects.
+    comments : Comments
+        The `Comments` object containing the hardcoded comments per file extension.
+    newline : bool
+        Indicates whether a newline should be added before the comment.
+    """
     comment_map = comments.generate()
     for path, file in files.items():
         file_obj = file["state"]["file"]
@@ -88,7 +118,14 @@ def append_eof_comment(
 
 
 def main() -> int:
-    """Execute main workflow."""
+    """
+    Execute the main workflow.
+
+    Returns
+    -------
+    int
+        The exit code for the program.
+    """
     parser, namespace = arg_parser_init()
 
     if namespace.version:

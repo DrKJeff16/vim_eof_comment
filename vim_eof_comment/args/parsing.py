@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Argparse utilities.
+"""
+Argument parsing utilities for `vim-eof-comment`.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -11,11 +12,22 @@ from ..types.typeddict import IndentHandler, ParserSpec
 from ..util import die
 
 
-def bootstrap_args(
-        parser: ArgumentParser,
-        specs: Tuple[ParserSpec]
-) -> Namespace:
-    """Bootstraps the program arguments."""
+def bootstrap_args(parser: ArgumentParser, specs: List[ParserSpec]) -> Namespace:
+    """
+    Bootstraps the program arguments.
+
+    Parameters
+    ----------
+    parser : argparse.ArgumentParser
+        The `argparse.ArgumentParser` object.
+    specs : List[vim_eof_comment.types.typeddict.ParserSpec]
+        A list containing `ParserSpec` objects.
+
+    Returns
+    -------
+    namespace : argparse.Namespace
+        The generated argparse Namespace object.
+    """
     for spec in specs:
         opts, kwargs = spec["opts"], spec["kwargs"]
         parser.add_argument(*opts, **kwargs)
@@ -29,7 +41,16 @@ def bootstrap_args(
 
 
 def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
-    """Generates the argparse namespace."""
+    """
+    Generate the argparse namespace.
+
+    Returns
+    -------
+    parser : argparse.ArgumentParser
+        The generated `argparse.ArgumentParser` object.
+    namespace : argparse.Namespace
+        The generated `argparse.Namespace` object.
+    """
     parser = ArgumentParser(
         prog="vim-eof-comment",
         description="Checks for Vim EOF comments in all matching files in specific directories",
@@ -100,7 +121,19 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
 
 
 def indent_handler(indent: str) -> List[IndentHandler]:
-    """Parse indent levels defined by the user."""
+    """
+    Parse indent levels defined by the user.
+
+    Parameters
+    ----------
+    indent : str
+        The `-i` option argument string.
+
+    Returns
+    -------
+    maps : List[vim_eof_comment.types.typeddict.IndentHandler]
+        A list of `IndentHandler` objects.
+    """
     if indent == "":
         return list()
 

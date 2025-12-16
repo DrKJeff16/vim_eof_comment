@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Custom vim-eof-comment TypeDict objects.
+"""
+Custom vim-eof-comment TypeDict objects.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """

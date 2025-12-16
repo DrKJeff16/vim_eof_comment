@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""EOF comments checker regex matching utilities.
+"""
+EOF comments checker regex matching utilities.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -10,7 +11,21 @@ from .util import verbose_print
 
 
 def matches(s: str, verbose: bool) -> bool:
-    """Check if given string matches any of the given patterns."""
+    """
+    Check if given string matches any of the given patterns.
+
+    Parameters
+    ----------
+    s : str
+        The string to be matched.
+    verbose : bool
+        Enables verbose mode.
+
+    Returns
+    -------
+    bool
+        Whether the string matches the default regex.
+    """
     pats = (
         "vim:([a-zA-Z]+(=[a-zA-Z0-9_]*)?:)+",
         "vim:\\sset(\\s[a-zA-Z]+(=[a-zA-Z0-9_]*)?)*\\s[a-zA-Z]+(=[a-zA-Z0-9_]*)?:"

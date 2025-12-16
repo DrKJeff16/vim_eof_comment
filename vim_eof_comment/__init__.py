@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Ensure EOF Vim comments.
+"""
+Ensure EOF Vim comments.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """

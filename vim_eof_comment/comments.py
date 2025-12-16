@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
-"""Usual comment structures per filetype.
+"""
+Per-filetype modeline comment class.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
@@ -57,12 +58,6 @@ _DEFAULT: Dict[str, IndentMap] = {
 }
 
 
-class EOFCommentsError(Exception):
-    """EOF Comments error type."""
-
-    pass
-
-
 class Comments():
     """Vim EOF comments class."""
 
@@ -81,10 +76,7 @@ class Comments():
 
         self.langs = dict()
         for lang, mapping in mappings.items():
-            if not (self.__is_available(lang)):
-                continue
-
-            if len(mapping) == 0:
+            if not (self.__is_available(lang)) or len(mapping) == 0:
                 continue
 
             indent, expandtab = mapping["level"], True
