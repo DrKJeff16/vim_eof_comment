@@ -1,3 +1,7 @@
+from typing import NoReturn
+
+from ..util import die as die
+
 class _VersionInfo:
     """
     A sys-inspired version_info object type.
@@ -36,6 +40,12 @@ class _VersionInfo:
         """Generate printable representation of the class instance."""
     def __eq__(self, b) -> bool:
         """Compare between two ``_VersionInfo`` instances."""
+    def get_all_versions(self) -> list[str]:
+        """Retrieve all versions as a list of strings."""
 
 version_info: _VersionInfo
+
+def list_versions() -> NoReturn:
+    """List all versions."""
+
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

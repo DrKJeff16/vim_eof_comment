@@ -102,6 +102,15 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             }
         },
         {
+            "opts": ["--list-versions"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "List all versions of this script.",
+                "dest": "list_versions",
+            }
+        },
+        {
             "opts": ["-v", "--verbose"],
             "kwargs": {
                 "required": False,

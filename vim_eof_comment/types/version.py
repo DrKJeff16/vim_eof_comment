@@ -5,7 +5,9 @@ Custom vim-eof-comment versioning objects.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from typing import List, Tuple
+from typing import List, NoReturn, Tuple
+
+from ..util import die
 
 
 class _VersionInfo():
@@ -65,6 +67,14 @@ class _VersionInfo():
         b: _VersionInfo = b
         return self.major == b.major and self.minor == b.minor and self.patch == b.patch
 
+    def get_all_versions(self) -> List[str]:
+        """Retrieve all versions as a list of strings."""
+        result: List[str] = list()
+        for info in self._all_versions:
+            result.append(f"{info[0]}.{info[1]}.{info[2]}")
+
+        return result
+
 
 version_info: _VersionInfo = _VersionInfo([
     (0, 1, 1),
@@ -108,5 +118,11 @@ version_info: _VersionInfo = _VersionInfo([
     (0, 2, 0),
     (0, 2, 1),
 ])
+
+
+def list_versions() -> NoReturn:
+    """List all versions."""
+    all_versions = version_info.get_all_versions()
+    die(*all_versions, code=0)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

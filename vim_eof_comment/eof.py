@@ -17,7 +17,7 @@ from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .regex import matches
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
                               IOWrapperBool)
-from .types.version import version_info
+from .types.version import list_versions, version_info
 from .util import die, gen_indent_maps, verbose_print, version_print
 
 _RED: int = Fore.LIGHTRED_EX
@@ -132,6 +132,9 @@ def main() -> int:
 
     if namespace.list_fts:
         list_filetypes()
+
+    if namespace.list_versions:
+        list_versions()
 
     if not (namespace.directories and namespace.exts):
         die(code=1, func=parser.print_usage)
