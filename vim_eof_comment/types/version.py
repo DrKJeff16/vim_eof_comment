@@ -106,6 +106,7 @@ version_info: _VersionInfo = _VersionInfo([
     (0, 1, 37),
     (0, 1, 38),
     (0, 2, 0),
+    (0, 2, 1),
 ])
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:
