@@ -1,6 +1,7 @@
 from typing import Iterator, NoReturn
 
 from ..types.typeddict import IndentMap as IndentMap
+from ..util import die as die
 from .types import GeneratedEOFComments as GeneratedEOFComments
 from .types import IndentMapDict as IndentMapDict
 
@@ -58,5 +59,8 @@ class Comments:
         -------
         ``str`` or ``None``
         """
+
+def list_filetypes() -> NoReturn:
+    """List all available filetypes."""
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

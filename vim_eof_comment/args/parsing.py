@@ -93,6 +93,15 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             }
         },
         {
+            "opts": ["-l", "--list-filetypes"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "List available filetypes",
+                "dest": "list_fts",
+            }
+        },
+        {
             "opts": ["-v", "--verbose"],
             "kwargs": {
                 "required": False,

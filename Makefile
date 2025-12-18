@@ -1,6 +1,9 @@
 .PHONY: all help lint build local-install upload clean sign run-script docs
 
-all: help
+all:
+	$(MAKE) clean
+	$(MAKE) local-install
+	$(MAKE) run-script
 
 clean:
 	@rm -rf build dist *.egg-info
@@ -30,11 +33,11 @@ lint:
 	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 \
 		--exclude .tox,.git,*staticfiles*,build,locale,docs,tools,venv,.venv,*migrations*,*.pyc,*.pyi,__pycache__,test_*.py \
 		.
-	@mypy vim_eof_comment
 
 stubs: lint
 	@stubgen --include-docstrings --include-private -p vim_eof_comment -o .
 	@isort vim_eof_comment
+	@mypy vim_eof_comment
 
 build: stubs
 	@python3 -m build &> /dev/null
@@ -46,7 +49,9 @@ local-install: build
 	@python3 -m pip install .
 
 run-script:
-	@vim-eof-comment -e py,pyi -n .
+	@vim-eof-comment -e py,pyi,Makefile -n -v .
 
 upload:
 	@twine upload dist/*
+
+# vim: set ts=4 sts=4 sw=0 noet ai si sta:

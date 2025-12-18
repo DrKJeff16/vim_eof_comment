@@ -5,14 +5,16 @@ Per-filetype modeline comment class.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from typing import Dict, Iterator, NoReturn
+from typing import Dict, Iterator, List, NoReturn
 
 from ..types.typeddict import IndentMap
+from ..util import die
 from .types import GeneratedEOFComments, IndentMapDict
 
 _formats: GeneratedEOFComments = GeneratedEOFComments(
     C="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
     H="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
+    Makefile="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     bash="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     c="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
     cc="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
@@ -27,6 +29,7 @@ _formats: GeneratedEOFComments = GeneratedEOFComments(
     lua="-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     markdown="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
     md="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
+    mk="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     py="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     pyi="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
     sh="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
@@ -37,6 +40,7 @@ _formats: GeneratedEOFComments = GeneratedEOFComments(
 _DEFAULT: IndentMapDict = IndentMapDict(
     C=IndentMap(level=2, expandtab=True),
     H=IndentMap(level=2, expandtab=True),
+    Makefile=IndentMap(level=4, expandtab=False),
     bash=IndentMap(level=4, expandtab=True),
     c=IndentMap(level=2, expandtab=True),
     cc=IndentMap(level=2, expandtab=True),
@@ -51,6 +55,7 @@ _DEFAULT: IndentMapDict = IndentMapDict(
     lua=IndentMap(level=4, expandtab=True),
     markdown=IndentMap(level=2, expandtab=True),
     md=IndentMap(level=2, expandtab=True),
+    mk=IndentMap(level=4, expandtab=False),
     py=IndentMap(level=4, expandtab=True),
     pyi=IndentMap(level=4, expandtab=True),
     sh=IndentMap(level=4, expandtab=True),
@@ -160,5 +165,17 @@ class Comments():
         """
         comments: GeneratedEOFComments = self.generate()
         return comments.get(ext, None)
+
+
+def list_filetypes() -> NoReturn:
+    """List all available filetypes."""
+    txt: List[str] = [""]
+
+    c: Comments = Comments()
+    defaults: IndentMapDict = c.get_defaults()
+    for ext, indents in defaults.items():
+        txt.append(f"- {ext} - {indents}")
+
+    die(*txt, code=0)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

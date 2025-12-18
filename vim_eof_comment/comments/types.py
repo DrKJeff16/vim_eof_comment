@@ -15,6 +15,7 @@ class GeneratedEOFComments(TypedDict):
 
     C: str
     H: str
+    Makefile: str
     bash: str
     c: str
     cc: str
@@ -29,6 +30,7 @@ class GeneratedEOFComments(TypedDict):
     lua: str
     markdown: str
     md: str
+    mk: str
     py: str
     pyi: str
     sh: str
@@ -41,6 +43,7 @@ class IndentMapDict(TypedDict):
 
     C: IndentMap
     H: IndentMap
+    Makefile: IndentMap
     bash: IndentMap
     c: IndentMap
     cc: IndentMap
@@ -55,6 +58,7 @@ class IndentMapDict(TypedDict):
     lua: IndentMap
     markdown: IndentMap
     md: IndentMap
+    mk: IndentMap
     py: IndentMap
     pyi: IndentMap
     sh: IndentMap

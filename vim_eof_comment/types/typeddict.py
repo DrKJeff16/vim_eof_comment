@@ -28,6 +28,14 @@ class IndentMap(TypedDict):
     level: int
     expandtab: bool
 
+    def __str__(self) -> str:
+        """Return string representation."""
+        return "{" + f"level={self.level}, expandtab={self.expandtab}" + "}"
+
+    def __repr__(self) -> str:
+        """Return string representation."""
+        return self.__str__()
+
 
 class IndentHandler(TypedDict):
     """A ``TypedDict`` container."""

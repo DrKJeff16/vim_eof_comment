@@ -12,7 +12,7 @@ from colorama import Fore, Style
 from colorama import init as color_init
 
 from .args.parsing import arg_parser_init, indent_handler
-from .comments.generator import Comments
+from .comments.generator import Comments, list_filetypes
 from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .regex import matches
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
@@ -129,6 +129,9 @@ def main() -> int:
 
     if namespace.version:
         version_print(str(version_info))
+
+    if namespace.list_fts:
+        list_filetypes()
 
     if not (namespace.directories and namespace.exts):
         die(code=1, func=parser.print_usage)

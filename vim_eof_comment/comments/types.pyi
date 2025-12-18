@@ -6,6 +6,7 @@ class GeneratedEOFComments(TypedDict):
     """A ``TypedDict`` object containing all the file-extension to comment elements."""
     C: str
     H: str
+    Makefile: str
     bash: str
     c: str
     cc: str
@@ -20,6 +21,7 @@ class GeneratedEOFComments(TypedDict):
     lua: str
     markdown: str
     md: str
+    mk: str
     py: str
     pyi: str
     sh: str
@@ -30,6 +32,7 @@ class IndentMapDict(TypedDict):
     """A ``TypedDict`` object with ``IndentMap`` values."""
     C: IndentMap
     H: IndentMap
+    Makefile: IndentMap
     bash: IndentMap
     c: IndentMap
     cc: IndentMap
@@ -44,6 +47,7 @@ class IndentMapDict(TypedDict):
     lua: IndentMap
     markdown: IndentMap
     md: IndentMap
+    mk: IndentMap
     py: IndentMap
     pyi: IndentMap
     sh: IndentMap
