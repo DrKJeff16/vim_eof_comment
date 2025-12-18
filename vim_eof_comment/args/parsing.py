@@ -66,12 +66,39 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             },
         },
         {
+            "opts": ["-v", "--verbose"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "Enable verbose mode",
+                "dest": "verbose",
+            }
+        },
+        {
             "opts": ["-V", "--version"],
             "kwargs": {
                 "required": False,
                 "action": "store_true",
                 "help": "Show version",
                 "dest": "version",
+            }
+        },
+        {
+            "opts": ["-L", "--list-versions"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "List all versions of this script.",
+                "dest": "list_versions",
+            }
+        },
+        {
+            "opts": ["-l", "--list-filetypes"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "List available filetypes",
+                "dest": "list_fts",
             }
         },
         {
@@ -93,34 +120,7 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
             }
         },
         {
-            "opts": ["-l", "--list-filetypes"],
-            "kwargs": {
-                "required": False,
-                "action": "store_true",
-                "help": "List available filetypes",
-                "dest": "list_fts",
-            }
-        },
-        {
-            "opts": ["--list-versions"],
-            "kwargs": {
-                "required": False,
-                "action": "store_true",
-                "help": "List all versions of this script.",
-                "dest": "list_versions",
-            }
-        },
-        {
-            "opts": ["-v", "--verbose"],
-            "kwargs": {
-                "required": False,
-                "action": "store_true",
-                "help": "Enable verbose mode",
-                "dest": "verbose",
-            }
-        },
-        {
-            "opts": ["-i"],
+            "opts": ["-i", "--indents"],
             "kwargs": {
                 "required": False,
                 "metavar": "EXT1:INDENT1[:<Y|N>][,...]",
