@@ -16,7 +16,7 @@ classifiers = [
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
-dependencies = ["argparse", "colorama", "setuptools", "typing", "wheel"]
+dependencies = ["argcomplete", "argparse", "colorama", "setuptools", "typing", "wheel"]
 description = "Adds Vim EOF comments for given filetypes in given directories"
 license = "GPL-2.0-only"
 maintainers = [{ name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com" }]

@@ -11,6 +11,7 @@ typing = "*"
 typing-extensions = "*"
 pyproject = "*"
 colorama = "*"
+argcomplete = "*"
 
 [dev-packages]
 pynvim = "*"

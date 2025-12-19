@@ -5,6 +5,8 @@ Ensure EOF Vim comments.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
+from . import args, comments, eof, file, regex
+from .eof import main
 from .version import version_info
 
 version: str = str(version_info)

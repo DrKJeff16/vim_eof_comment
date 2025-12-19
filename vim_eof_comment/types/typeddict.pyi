@@ -1,10 +1,12 @@
-from io import TextIOWrapper
-from typing import Any, TypedDict
+from typing import Any, TextIO, TypedDict
+
+from argcomplete.completers import DirectoriesCompleter as DirectoriesCompleter
 
 class ParserSpec(TypedDict):
     """A ``TypedDict`` container."""
     opts: tuple[str]
     kwargs: dict[str, Any]
+    completer: DirectoriesCompleter | None
 
 class CommentMap(TypedDict):
     """A ``TypedDict`` container."""
@@ -23,7 +25,7 @@ class IndentHandler(TypedDict):
 
 class IOWrapperBool(TypedDict):
     """A ``TypedDict`` container."""
-    file: TextIOWrapper
+    file: TextIO
     has_nwl: bool
 
 class LineBool(TypedDict):
@@ -33,7 +35,7 @@ class LineBool(TypedDict):
 
 class BatchPathDict(TypedDict):
     """A ``TypedDict`` container."""
-    file: TextIOWrapper
+    file: TextIO
     ext: str
 
 class BatchPairDict(TypedDict):

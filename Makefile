@@ -38,6 +38,7 @@ help:
 lint:
 	@echo -e "Linting...\n"
 	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 \
+		--per-file-ignores=__init__.py:F401 \
 		--exclude .tox,.git,*staticfiles*,build,locale,docs,tools,venv,.venv,*migrations*,*.pyc,*.pyi,__pycache__,test_*.py \
 		.
 	@echo -e "\nDone!"

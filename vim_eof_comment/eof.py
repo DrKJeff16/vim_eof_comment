@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
+# PYTHON_ARGCOMPLETE_OK
 """
 Ensure EOF Vim comment in specific filetypes.
 
@@ -125,25 +126,25 @@ def main() -> int:
     int
         The exit code for the program.
     """
-    parser, namespace = arg_parser_init()
+    parser, ns = arg_parser_init()
 
-    if namespace.version:
+    if ns.version:
         version_print(str(version_info))
 
-    if namespace.list_fts:
+    if ns.list_fts:
         list_filetypes()
 
-    if namespace.list_versions:
+    if ns.list_versions:
         list_versions()
 
-    if not (namespace.directories and namespace.exts):
+    if not (ns.directories and ns.exts) or len(ns.directories) == 0 or ns.exts == "":
         die(code=1, func=parser.print_usage)
 
-    dirs: Tuple[str] = tuple(namespace.directories)
-    exts: Tuple[str] = tuple(namespace.exts.split(","))
-    newline: bool = namespace.newline
-    indent: List[IndentHandler] = indent_handler(namespace.indent)
-    verbose: bool = namespace.verbose
+    dirs: Tuple[str] = tuple(ns.directories)
+    exts: Tuple[str] = tuple(ns.exts.split(","))
+    newline: bool = ns.newline
+    indent: List[IndentHandler] = indent_handler(ns.indent)
+    verbose: bool = ns.verbose
 
     indent = gen_indent_maps(indent.copy())
 

@@ -8,8 +8,11 @@ Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 from argparse import ArgumentError, ArgumentParser, Namespace
 from typing import List, Tuple
 
+from argcomplete.completers import DirectoriesCompleter
+
 from ..types.typeddict import IndentHandler, ParserSpec
 from ..util import die
+from .completion import complete_parser
 
 
 def bootstrap_args(parser: ArgumentParser, specs: List[ParserSpec]) -> Namespace:
@@ -30,7 +33,12 @@ def bootstrap_args(parser: ArgumentParser, specs: List[ParserSpec]) -> Namespace
     """
     for spec in specs:
         opts, kwargs = spec["opts"], spec["kwargs"]
-        parser.add_argument(*opts, **kwargs)
+        if spec["completer"] is not None:
+            parser.add_argument(*opts, **kwargs).completer = spec["completer"]
+        else:
+            parser.add_argument(*opts, **kwargs)
+
+    complete_parser(parser)
 
     try:
         namespace: Namespace = parser.parse_args()
@@ -64,6 +72,7 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "help": "The target directories to be checked",
                 "metavar": "/path/to/directory",
             },
+            "completer": DirectoriesCompleter(),
         },
         {
             "opts": ["-v", "--verbose"],
@@ -72,7 +81,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "action": "store_true",
                 "help": "Enable verbose mode",
                 "dest": "verbose",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-V", "--version"],
@@ -81,7 +91,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "action": "store_true",
                 "help": "Show version",
                 "dest": "version",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-L", "--list-versions"],
@@ -90,7 +101,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "action": "store_true",
                 "help": "List all versions of this script.",
                 "dest": "list_versions",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-l", "--list-filetypes"],
@@ -99,7 +111,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "action": "store_true",
                 "help": "List available filetypes",
                 "dest": "list_fts",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-e", "--extensions"],
@@ -108,7 +121,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "metavar": "EXT1[,EXT2[,EXT3[,...]]]",
                 "help": "A comma-separated list of file extensions (e.g. \"lua,c,cpp,cc,c++\")",
                 "dest": "exts",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-n", "--newline"],
@@ -117,7 +131,8 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "action": "store_true",
                 "help": "Add newline before EOF comment",
                 "dest": "newline",
-            }
+            },
+            "completer": None,
         },
         {
             "opts": ["-i", "--indents"],
@@ -132,6 +147,7 @@ def arg_parser_init() -> Tuple[ArgumentParser, Namespace]:
                 "default": "",
                 "dest": "indent",
             },
+            "completer": None,
         },
     )
 
@@ -164,7 +180,7 @@ def indent_handler(indent: str) -> List[IndentHandler]:
 
         ext, ind_level, et = inds[0], int(inds[1]), True
         if len(inds) >= 3 and inds[2].upper() in ("Y", "N"):
-            et = False if inds[2].upper() == "N" else True
+            et = not inds[2].upper() == "N"
 
         maps.append(IndentHandler(ext=ext, level=ind_level, expandtab=et))
 

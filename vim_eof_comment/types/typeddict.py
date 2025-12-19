@@ -5,8 +5,9 @@ Custom vim-eof-comment ``TypedDict`` objects.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from io import TextIOWrapper
-from typing import Any, Dict, Tuple, TypedDict
+from typing import Any, Dict, TextIO, Tuple, TypedDict
+
+from argcomplete.completers import DirectoriesCompleter
 
 
 class ParserSpec(TypedDict):
@@ -14,6 +15,7 @@ class ParserSpec(TypedDict):
 
     opts: Tuple[str]
     kwargs: Dict[str, Any]
+    completer: DirectoriesCompleter | None
 
 
 class CommentMap(TypedDict):
@@ -48,7 +50,7 @@ class IndentHandler(TypedDict):
 class IOWrapperBool(TypedDict):
     """A ``TypedDict`` container."""
 
-    file: TextIOWrapper
+    file: TextIO
     has_nwl: bool
 
 
@@ -62,7 +64,7 @@ class LineBool(TypedDict):
 class BatchPathDict(TypedDict):
     """A ``TypedDict`` container."""
 
-    file: TextIOWrapper
+    file: TextIO
     ext: str
 
 
