@@ -17,8 +17,8 @@ from .file import bootstrap_paths, get_last_line, modify_file, open_batch_paths
 from .regex import matches
 from .types.typeddict import (BatchPathDict, EOFCommentSearch, IndentHandler,
                               IOWrapperBool)
-from .types.version import list_versions, version_info
 from .util import die, gen_indent_maps, verbose_print, version_print
+from .version import list_versions, version_info
 
 _RED: int = Fore.LIGHTRED_EX
 _GREEN: int = Fore.LIGHTGREEN_EX

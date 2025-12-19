@@ -7,7 +7,7 @@ Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
 from typing import List, NoReturn, Tuple
 
-from ..util import die
+from .util import die
 
 
 class _VersionInfo():

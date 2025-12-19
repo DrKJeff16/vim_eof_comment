@@ -1,6 +1,6 @@
 from typing import NoReturn
 
-from ..util import die as die
+from .util import die as die
 
 class _VersionInfo:
     """

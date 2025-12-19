@@ -5,7 +5,7 @@ Ensure EOF Vim comments.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-from .types.version import version_info
+from .version import version_info
 
 version: str = str(version_info)
 
