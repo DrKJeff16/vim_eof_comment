@@ -105,25 +105,24 @@ class VersionInfo:
         bool
             Whether they are equal or not.
         """
-    def get_all_versions(self) -> list[str]:
-        '''
-        Retrieve all versions as a list of strings.
+    def get_all_versions(self) -> str:
+        """
+        Retrieve all versions as a string.
 
         Returns
         -------
-        List[str]
-            A list of strings, each containing the program versions, in ascending order.
+        str
+            A string, containing the program versions, in ascending order.
 
         Examples
         --------
         To generate a single string.
         >>> from vim_eof_comment.version import VersionInfo
-        >>> txt = "\\n".join(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]))
-        >>> print(txt)
+        >>> print(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]).get_all_versions())
         0.0.1
         0.0.2
-        0.0.3
-        '''
+        0.0.3 (latest)
+        """
 
 version_info: VersionInfo
 

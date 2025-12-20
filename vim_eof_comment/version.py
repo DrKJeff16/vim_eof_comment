@@ -134,28 +134,31 @@ class VersionInfo():
         b: VersionInfo = b
         return self.major == b.major and self.minor == b.minor and self.patch == b.patch
 
-    def get_all_versions(self) -> List[str]:
+    def get_all_versions(self) -> str:
         r"""
-        Retrieve all versions as a list of strings.
+        Retrieve all versions as a string.
 
         Returns
         -------
-        List[str]
-            A list of strings, each containing the program versions, in ascending order.
+        str
+            A string, containing the program versions, in ascending order.
 
         Examples
         --------
         To generate a single string.
         >>> from vim_eof_comment.version import VersionInfo
-        >>> txt = "\n".join(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]))
-        >>> print(txt)
+        >>> print(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]).get_all_versions())
         0.0.1
         0.0.2
-        0.0.3
+        0.0.3 (latest)
         """
-        result: List[str] = list()
-        for info in self.all_versions:
-            result.append(f"{info[0]}.{info[1]}.{info[2]}")
+        result = ""
+        for i, info in enumerate(self.all_versions):
+            result += f"{info[0]}.{info[1]}.{info[2]}"
+            if i == len(self.all_versions) - 1:
+                result += " (latest)"
+            else:
+                result += "\n"
 
         return result
 
@@ -211,7 +214,7 @@ version_info: VersionInfo = VersionInfo([
 
 def list_versions() -> NoReturn:
     """List all versions."""
-    all_versions: List[str] = version_info.get_all_versions()
-    die(*all_versions, code=0, sep="\n")
+    all_versions: str = version_info.get_all_versions()
+    die(all_versions, code=0)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:
