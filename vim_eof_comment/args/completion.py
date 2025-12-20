@@ -13,7 +13,16 @@ from argcomplete.finders import default_validator
 
 
 def complete_parser(parser: ArgumentParser, **kwargs) -> NoReturn:
-    """Complete the script argument parser."""
+    """
+    Complete the script argument parser.
+
+    Parameters
+    ----------
+    parser : argparse.ArgumentParser
+        The ``ArgumentParser`` object.
+    **kwargs
+        Extra parameters.
+    """
     autocomplete(parser, validator=default_validator, **kwargs)
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

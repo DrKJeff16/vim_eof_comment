@@ -31,3 +31,25 @@ version = "0.3.0"
     [project.urls]
     Issues     = "https://github.com/DrKJeff16/vim-eof-comment/issues"
     Repository = "https://github.com/DrKJeff16/vim-eof-comment"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",  # report on all checks, except the below
+    "ES01",
+    "EX01",
+    "SA01",
+]
+# remember to use single quotes for regex in TOML
+exclude = [ # don't report on objects that match any of these regex
+    '__call__$',
+    '__dict__$',
+    '__eq__$',
+    '__init__$',
+    '__repr__$',
+    '__str__$',
+    '\.undocumented_method$',
+]
+exclude_files = [ # don't process filepaths that match these regex
+    '^module/gui.*',
+    '^tests/.*',
+]

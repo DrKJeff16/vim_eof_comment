@@ -2,9 +2,15 @@ from typing import NoReturn
 
 from .util import die as die
 
-class _VersionInfo:
+class VersionInfo:
     """
     A sys-inspired version_info object type.
+
+    Parameters
+    ----------
+    all_versions : List[Tuple[int, int, int]]
+        A list of three number tuples, containing (in order) the major, minor and patch
+        components.
 
     Attributes
     ----------
@@ -14,36 +20,112 @@ class _VersionInfo:
         The minor component of the version.
     patch : int
         The patch component of the version.
+    all_versions : List[Tuple[int, int, int]]
+        A list of tuples containing all the versions in the object instance.
+
+    Methods
+    -------
+    get_all_versions()
     """
     major: int
     minor: int
     patch: int
-    _all_versions: list[tuple[int, int, int]]
+    all_versions: list[tuple[int, int, int]]
     def __init__(self, all_versions: list[tuple[int, int, int]]) -> None:
         """
-        Initialize _VersionInfo object.
+        Initialize VersionInfo object.
 
         Parameters
         ----------
         all_versions : List[Tuple[int, int, int]]
+            A list of three number tuples, containing (in order) the major, minor and patch
+            components.
         """
     def __str__(self) -> str:
         """
         Representate this object as a string.
 
+        This is what is returned when using ``str(VersionInfo(...))``.
+
         Returns
         -------
         str
             The string representation of the instance.
+
+        Examples
+        --------
+        Only one definition in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(str(VersionInfo([(0, 0, 1)])))
+        0.0.1
+
+        Multiple definitions in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(str(VersionInfo([(0, 0, 1), (0, 0, 2)])))
+        0.0.2
         """
     def __repr__(self) -> str:
-        """Generate printable representation of the class instance."""
-    def __eq__(self, b) -> bool:
-        """Compare between two ``_VersionInfo`` instances."""
-    def get_all_versions(self) -> list[str]:
-        """Retrieve all versions as a list of strings."""
+        """
+        Representate this object as a string.
 
-version_info: _VersionInfo
+        This is what is returned when using ``print(VersionInfo(...))``.
+
+        Returns
+        -------
+        str
+            The string representation of the instance.
+
+        Examples
+        --------
+        Only one definition in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(VersionInfo([(0, 0, 1)]))
+        0.0.1
+
+        Multiple definitions in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(VersionInfo([(0, 0, 1), (0, 0, 2)]))
+        0.0.2
+        """
+    def __eq__(self, b) -> bool:
+        """
+        Check the equality between two ``VersionInfo`` instances.
+
+        Parameters
+        ----------
+        b : VersionInfo
+            The other instance to compare.
+
+        Returns
+        -------
+        bool
+            Whether they are equal or not.
+        """
+    def get_all_versions(self) -> list[str]:
+        '''
+        Retrieve all versions as a list of strings.
+
+        Returns
+        -------
+        List[str]
+            A list of strings, each containing the program versions, in ascending order.
+
+        Examples
+        --------
+        To generate a single string.
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> txt = "\\n".join(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]))
+        >>> print(txt)
+        0.0.1
+        0.0.2
+        0.0.3
+        '''
+
+version_info: VersionInfo
 
 def list_versions() -> NoReturn:
     """List all versions."""

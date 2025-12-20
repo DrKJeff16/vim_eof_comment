@@ -5,7 +5,7 @@ from .types.typeddict import IndentMap as IndentMap
 
 def error(*msg, end: str = '\n', sep: str = ' ', flush: bool = False) -> NoReturn:
     '''
-    Prints to stderr.
+    Print to stderr.
 
     Parameters
     ----------
@@ -24,9 +24,9 @@ def error(*msg, end: str = '\n', sep: str = ' ', flush: bool = False) -> NoRetur
     '''
 def die(*msg, code: int = 0, end: str = '\n', sep: str = ' ', flush: bool = False, func: Callable[[TextIO], None] | None = None) -> NoReturn:
     '''
-    Kills program execution.
+    Kill the program execution.
 
-    Summons sys.exit() with a provided code and optionally prints code to stderr or stdout
+    Summons ``sys.exit()`` with a provided code and optionally prints code to stderr or stdout
     depending on the provuded exit code.
 
     Parameters
@@ -47,6 +47,25 @@ def die(*msg, code: int = 0, end: str = '\n', sep: str = ' ', flush: bool = Fals
     See Also
     --------
     vim_eof_comment.util.error : Function to be used if exit code is not 0.
+
+    Examples
+    --------
+    To kill the program with code 0 without any message.
+
+    >>> from vim_eof_comment.util import die
+    >>> die(code=0)
+
+    To kill the program with non-zero exit code with message (will print to stderr).
+
+    >>> from vim_eof_comment.util import die
+    >>> die("foo", "bar", code=1)
+    foo bar
+
+    To kill the program with exit code 0 with message (will print to stdout).
+
+    >>> from vim_eof_comment.util import die
+    >>> die("foo", "bar")
+    foo bar
     '''
 def verbose_print(*msg, verbose: bool | None = None, **kwargs) -> NoReturn:
     """
@@ -69,6 +88,8 @@ def version_print(version: str) -> NoReturn:
     """
     Print project version, then exit.
 
+    Parameters
+    ----------
     version : str
         The version string.
 
@@ -87,7 +108,7 @@ def gen_indent_maps(maps: list[IndentHandler]) -> dict[str, IndentMap] | None:
 
     Returns
     -------
-    map_d : Dict[str, IndentMap]
+    Dict[str, IndentMap]
         The generated indent map dictionary.
 
     Raises

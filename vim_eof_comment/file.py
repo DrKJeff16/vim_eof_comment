@@ -16,7 +16,7 @@ from .util import die, error
 
 def bootstrap_paths(paths: Tuple[str], exts: Tuple[str]) -> List[BatchPairDict]:
     """
-    Bootstraps all the matching paths in current dir and below.
+    Bootstrap all the matching paths in current dir and below.
 
     Parameters
     ----------
@@ -27,8 +27,8 @@ def bootstrap_paths(paths: Tuple[str], exts: Tuple[str]) -> List[BatchPairDict]:
 
     Returns
     -------
-    result : array_like
-        A list of BatchPairDict type objects.
+    List[BatchPairDict]
+        A list of ``BatchPairDict`` type objects.
     """
     result = list()
     for path in paths:
@@ -58,8 +58,8 @@ def open_batch_paths(paths: List[BatchPairDict]) -> Dict[str, BatchPathDict]:
 
     Returns
     -------
-    result : Dict[str, BatchPathDict]
-        A string to BatchPathDict dictionary.
+    Dict[str, BatchPathDict]
+        A ``str`` to ``BatchPathDict``` dictionary.
     """
     result = dict()
     for path in paths:
@@ -85,7 +85,7 @@ def modify_file(
         matching: bool
 ) -> str:
     """
-    Modifies a file containing a bad EOF comment.
+    Modify a file containing a bad EOF comment.
 
     Parameters
     ----------
@@ -134,7 +134,7 @@ def modify_file(
 
 def get_last_line(file: TextIOWrapper) -> LineBool:
     """
-    Returns the last line of a file and indicates whether it already has a newline.
+    Return the last line of a file and indicates whether it already has a newline.
 
     Parameters
     ----------
@@ -143,7 +143,7 @@ def get_last_line(file: TextIOWrapper) -> LineBool:
 
     Returns
     -------
-    last_line : LineBool
+    LineBool
         An object containing both the last line in a string and a boolean indicating a newline.
     """
     data: List[str] = file.read().split("\n")

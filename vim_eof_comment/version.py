@@ -10,9 +10,15 @@ from typing import List, NoReturn, Tuple
 from .util import die
 
 
-class _VersionInfo():
+class VersionInfo():
     """
     A sys-inspired version_info object type.
+
+    Parameters
+    ----------
+    all_versions : List[Tuple[int, int, int]]
+        A list of three number tuples, containing (in order) the major, minor and patch
+        components.
 
     Attributes
     ----------
@@ -22,22 +28,30 @@ class _VersionInfo():
         The minor component of the version.
     patch : int
         The patch component of the version.
+    all_versions : List[Tuple[int, int, int]]
+        A list of tuples containing all the versions in the object instance.
+
+    Methods
+    -------
+    get_all_versions()
     """
 
     major: int
     minor: int
     patch: int
-    _all_versions: List[Tuple[int, int, int]]
+    all_versions: List[Tuple[int, int, int]]
 
     def __init__(self, all_versions: List[Tuple[int, int, int]]):
         """
-        Initialize _VersionInfo object.
+        Initialize VersionInfo object.
 
         Parameters
         ----------
         all_versions : List[Tuple[int, int, int]]
+            A list of three number tuples, containing (in order) the major, minor and patch
+            components.
         """
-        self._all_versions = all_versions.copy()
+        self.all_versions = all_versions.copy()
 
         all_versions = all_versions.copy()[::-1]
         self.major = all_versions[0][0]
@@ -48,35 +62,103 @@ class _VersionInfo():
         """
         Representate this object as a string.
 
+        This is what is returned when using ``str(VersionInfo(...))``.
+
         Returns
         -------
         str
             The string representation of the instance.
+
+        Examples
+        --------
+        Only one definition in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(str(VersionInfo([(0, 0, 1)])))
+        0.0.1
+
+        Multiple definitions in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(str(VersionInfo([(0, 0, 1), (0, 0, 2)])))
+        0.0.2
         """
         return f"{self.major}.{self.minor}.{self.patch}"
 
     def __repr__(self) -> str:
-        """Generate printable representation of the class instance."""
+        """
+        Representate this object as a string.
+
+        This is what is returned when using ``print(VersionInfo(...))``.
+
+        Returns
+        -------
+        str
+            The string representation of the instance.
+
+        Examples
+        --------
+        Only one definition in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(VersionInfo([(0, 0, 1)]))
+        0.0.1
+
+        Multiple definitions in constructor.
+
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> print(VersionInfo([(0, 0, 1), (0, 0, 2)]))
+        0.0.2
+        """
         return self.__str__()
 
     def __eq__(self, b) -> bool:
-        """Compare between two ``_VersionInfo`` instances."""
-        if not isinstance(b, _VersionInfo):
+        """
+        Check the equality between two ``VersionInfo`` instances.
+
+        Parameters
+        ----------
+        b : VersionInfo
+            The other instance to compare.
+
+        Returns
+        -------
+        bool
+            Whether they are equal or not.
+        """
+        if not isinstance(b, VersionInfo):
             return False
 
-        b: _VersionInfo = b
+        b: VersionInfo = b
         return self.major == b.major and self.minor == b.minor and self.patch == b.patch
 
     def get_all_versions(self) -> List[str]:
-        """Retrieve all versions as a list of strings."""
+        r"""
+        Retrieve all versions as a list of strings.
+
+        Returns
+        -------
+        List[str]
+            A list of strings, each containing the program versions, in ascending order.
+
+        Examples
+        --------
+        To generate a single string.
+        >>> from vim_eof_comment.version import VersionInfo
+        >>> txt = "\n".join(VersionInfo([(0, 0, 1), (0, 0, 2), (0, 1, 0)]))
+        >>> print(txt)
+        0.0.1
+        0.0.2
+        0.0.3
+        """
         result: List[str] = list()
-        for info in self._all_versions:
+        for info in self.all_versions:
             result.append(f"{info[0]}.{info[1]}.{info[2]}")
 
         return result
 
 
-version_info: _VersionInfo = _VersionInfo([
+version_info: VersionInfo = VersionInfo([
     (0, 1, 1),
     (0, 1, 2),
     (0, 1, 3),
@@ -125,7 +207,7 @@ version_info: _VersionInfo = _VersionInfo([
 
 def list_versions() -> NoReturn:
     """List all versions."""
-    all_versions = version_info.get_all_versions()
+    all_versions: List[str] = version_info.get_all_versions()
     die(*all_versions, code=0, sep="\n")
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

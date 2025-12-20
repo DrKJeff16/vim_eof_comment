@@ -7,7 +7,7 @@ from .completion import complete_parser as complete_parser
 
 def bootstrap_args(parser: ArgumentParser, specs: list[ParserSpec]) -> Namespace:
     """
-    Bootstraps the program arguments.
+    Bootstrap the program arguments.
 
     Parameters
     ----------
@@ -18,8 +18,8 @@ def bootstrap_args(parser: ArgumentParser, specs: list[ParserSpec]) -> Namespace
 
     Returns
     -------
-    namespace : argparse.Namespace
-        The generated argparse Namespace object.
+    argparse.Namespace
+        The generated ``argparse.Namespace`` object.
     """
 def arg_parser_init() -> tuple[ArgumentParser, Namespace]:
     """
@@ -43,7 +43,7 @@ def indent_handler(indent: str) -> list[IndentHandler]:
 
     Returns
     -------
-    maps : List[vim_eof_comment.types.typeddict.IndentHandler]
+    List[vim_eof_comment.types.typeddict.IndentHandler]
         A list of ``IndentHandler`` objects.
     """
 

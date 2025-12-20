@@ -8,7 +8,7 @@ from .util import error as error
 
 def bootstrap_paths(paths: tuple[str], exts: tuple[str]) -> list[BatchPairDict]:
     """
-    Bootstraps all the matching paths in current dir and below.
+    Bootstrap all the matching paths in current dir and below.
 
     Parameters
     ----------
@@ -19,8 +19,8 @@ def bootstrap_paths(paths: tuple[str], exts: tuple[str]) -> list[BatchPairDict]:
 
     Returns
     -------
-    result : array_like
-        A list of BatchPairDict type objects.
+    List[BatchPairDict]
+        A list of ``BatchPairDict`` type objects.
     """
 def open_batch_paths(paths: list[BatchPairDict]) -> dict[str, BatchPathDict]:
     """
@@ -33,12 +33,12 @@ def open_batch_paths(paths: list[BatchPairDict]) -> dict[str, BatchPathDict]:
 
     Returns
     -------
-    result : Dict[str, BatchPathDict]
-        A string to BatchPathDict dictionary.
+    Dict[str, BatchPathDict]
+        A ``str`` to ``BatchPathDict``` dictionary.
     """
 def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, newline: bool, has_nwl: bool, matching: bool) -> str:
     """
-    Modifies a file containing a bad EOF comment.
+    Modify a file containing a bad EOF comment.
 
     Parameters
     ----------
@@ -63,7 +63,7 @@ def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, newline
     """
 def get_last_line(file: TextIOWrapper) -> LineBool:
     """
-    Returns the last line of a file and indicates whether it already has a newline.
+    Return the last line of a file and indicates whether it already has a newline.
 
     Parameters
     ----------
@@ -72,7 +72,7 @@ def get_last_line(file: TextIOWrapper) -> LineBool:
 
     Returns
     -------
-    last_line : LineBool
+    LineBool
         An object containing both the last line in a string and a boolean indicating a newline.
     """
 

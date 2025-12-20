@@ -34,7 +34,7 @@ def eof_comment_search(
         verbose: bool
 ) -> Dict[str, EOFCommentSearch]:
     """
-    Searches through opened files.
+    Search through opened files.
 
     Parameters
     ----------
@@ -49,8 +49,15 @@ def eof_comment_search(
 
     Returns
     -------
-    result : Dict[str, EOFCommentSearch]
+    Dict[str, EOFCommentSearch]
         A dictionary of ``str`` to ``EOFCommentSearch`` objects.
+
+    See Also
+    --------
+    vim_eof_comment.types.BatchPathDict
+        The ``files`` type objects in its dictionary values.
+    vim_eof_comment.types.EOFCommentSearch
+        The object type for the returning dictionary values.
     """
     result: Dict[str, EOFCommentSearch] = dict()
     comment_map = comments.generate()

@@ -27,7 +27,7 @@ _RESET: int
 
 def eof_comment_search(files: dict[str, BatchPathDict], comments: Comments, newline: bool, verbose: bool) -> dict[str, EOFCommentSearch]:
     """
-    Searches through opened files.
+    Search through opened files.
 
     Parameters
     ----------
@@ -42,8 +42,15 @@ def eof_comment_search(files: dict[str, BatchPathDict], comments: Comments, newl
 
     Returns
     -------
-    result : Dict[str, EOFCommentSearch]
+    Dict[str, EOFCommentSearch]
         A dictionary of ``str`` to ``EOFCommentSearch`` objects.
+
+    See Also
+    --------
+    vim_eof_comment.types.BatchPathDict
+        The ``files`` type objects in its dictionary values.
+    vim_eof_comment.types.EOFCommentSearch
+        The object type for the returning dictionary values.
     """
 def append_eof_comment(files: dict[str, EOFCommentSearch], comments: Comments, newline: bool) -> NoReturn:
     """

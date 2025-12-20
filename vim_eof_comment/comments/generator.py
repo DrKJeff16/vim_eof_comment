@@ -65,7 +65,31 @@ _DEFAULT: IndentMapDict = IndentMapDict(
 
 
 class Comments():
-    """Vim EOF comments class."""
+    """
+    Vim EOF comments class.
+
+    Parameters
+    ----------
+    mappings : IndentMapDict, optional, default=None
+        The ``str`` to ``IndentMap`` dictionary.
+
+    Attributes
+    ----------
+    __DEFAULT : IndentMapDict
+        The default/fallback alternative to ``langs``.
+    __formats : GeneratedEOFComments
+        The default/fallback alternative to ``comments``.
+    langs : IndentMapDict
+        A dictionary of ``IndentMap`` type objects.
+    comments : GeneratedEOFComments
+        A dictionary of file-extension-to-EOF-comment mappings.
+
+    Methods
+    -------
+    __is_available(lang)
+    __fill_langs(langs)
+    get_defaults()
+    """
 
     __DEFAULT: IndentMapDict = _DEFAULT.copy()
     __formats: GeneratedEOFComments = _formats.copy()
@@ -104,11 +128,30 @@ class Comments():
             yield (k, v)
 
     def __is_available(self, lang: str) -> bool:
-        """Checks if a given lang is available within the class."""
+        """
+        Check if a given lang is available within the class.
+
+        Parameters
+        ----------
+        lang : str
+            The file extension.
+
+        Returns
+        -------
+        bool
+            Represents whether the file extension has been included in the defaults.
+        """
         return lang in self.__DEFAULT.keys()
 
     def __fill_langs(self, langs: IndentMapDict) -> NoReturn:
-        """Fill languages dict."""
+        """
+        Fill languages dict.
+
+        Parameters
+        ----------
+        langs : IndentMapDict
+            A dictionary of ``IndentMap`` type objects.
+        """
         if len(langs) == 0:
             self.langs = self.__DEFAULT.copy()
             return
@@ -125,6 +168,7 @@ class Comments():
         Returns
         -------
         IndentMapDict
+            A dictionary of ``IndentMap`` type objects.
         """
         return self.__DEFAULT
 
@@ -134,7 +178,7 @@ class Comments():
 
         Returns
         -------
-        comments : GeneratedEOFComments
+        GeneratedEOFComments
             The customly generated comments dictionary.
         """
         comments: Dict[str, str] = dict()
@@ -161,7 +205,8 @@ class Comments():
 
         Returns
         -------
-        ``str`` or ``None``
+        str or None
+            Either the file extension string, or if not available then ``None``.
         """
         comments: GeneratedEOFComments = self.generate()
         return comments.get(ext, None)
