@@ -2,7 +2,19 @@ from typing import Iterator, NoReturn
 
 from .types import GeneratedEOFComments, IndentMapDict
 
-__all__ = ['list_filetypes', 'Comments']
+__all__ = ['Comments', 'export_json', 'import_json', 'list_filetypes']
+
+def import_json() -> tuple[GeneratedEOFComments, IndentMapDict]:
+    """
+    Import default vars from JSON file.
+
+    Returns
+    -------
+    comments : GeneratedEOFComments
+        The default ``GeneratedEOFComments``.
+    map_dict : IndentMapDict
+        The default ``IndentMapDict``.
+    """
 
 class Comments:
     """
@@ -103,5 +115,7 @@ class Comments:
 
 def list_filetypes() -> NoReturn:
     """List all available filetypes."""
+def export_json() -> NoReturn:
+    """Export default vars to JSON."""
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

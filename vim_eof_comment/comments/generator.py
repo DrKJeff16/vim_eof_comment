@@ -5,71 +5,46 @@ Per-filetype modeline comment class.
 
 Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
-__all__ = ["list_filetypes", "Comments"]
+__all__ = ["Comments", "export_json", "import_json", "list_filetypes"]
 
-from typing import Dict, Iterator, List, NoReturn
+import json
+import os
+from io import TextIOWrapper
+from os.path import exists, isdir, realpath
+from typing import Dict, Iterator, List, NoReturn, Tuple
 
-from ..types import IndentMap
 from ..util import die
 from .types import GeneratedEOFComments, IndentMapDict
 
-_formats: GeneratedEOFComments = GeneratedEOFComments(
-    C="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    H="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    Makefile="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    bash="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    c="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    cc="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    cpp="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    css="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    fish="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    h="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    hh="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    hpp="/* vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: */",
-    htm="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
-    html="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
-    latex="% vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    lua="-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    markdown="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
-    md="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
-    mk="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    py="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    pyi="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    rb="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    sh="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    tex="% vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-    xml="<!-- vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta: -->",
-    zsh="# vim: set ts={ts} sts={sts} sw={sw} {et} ai si sta:",
-)
+_JSON_FILE: str = realpath("./vim_eof_comment/comments/filetypes.json")
 
-_DEFAULT: IndentMapDict = IndentMapDict(
-    C=IndentMap(level=2, expandtab=True),
-    H=IndentMap(level=2, expandtab=True),
-    Makefile=IndentMap(level=4, expandtab=False),
-    bash=IndentMap(level=4, expandtab=True),
-    c=IndentMap(level=2, expandtab=True),
-    cc=IndentMap(level=2, expandtab=True),
-    cpp=IndentMap(level=2, expandtab=True),
-    css=IndentMap(level=4, expandtab=True),
-    fish=IndentMap(level=4, expandtab=True),
-    h=IndentMap(level=2, expandtab=True),
-    hh=IndentMap(level=2, expandtab=True),
-    hpp=IndentMap(level=2, expandtab=True),
-    htm=IndentMap(level=2, expandtab=True),
-    html=IndentMap(level=2, expandtab=True),
-    latex=IndentMap(level=2, expandtab=True),
-    lua=IndentMap(level=4, expandtab=True),
-    markdown=IndentMap(level=2, expandtab=True),
-    md=IndentMap(level=2, expandtab=True),
-    mk=IndentMap(level=4, expandtab=False),
-    py=IndentMap(level=4, expandtab=True),
-    pyi=IndentMap(level=4, expandtab=True),
-    rb=IndentMap(level=4, expandtab=True),
-    sh=IndentMap(level=4, expandtab=True),
-    tex=IndentMap(level=2, expandtab=True),
-    xml=IndentMap(level=2, expandtab=True),
-    zsh=IndentMap(level=4, expandtab=True),
-)
+
+def import_json() -> Tuple[GeneratedEOFComments, IndentMapDict]:
+    """
+    Import default vars from JSON file.
+
+    Returns
+    -------
+    comments : GeneratedEOFComments
+        The default ``GeneratedEOFComments``.
+    map_dict : IndentMapDict
+        The default ``IndentMapDict``.
+    """
+    splitter: str = "/" if os.name != "nt" else "\\"
+    split = __file__.split(splitter)
+    length = len(split) - 1
+    parent: str = splitter.join(split[:length])
+    file: TextIOWrapper = open(parent + f"{splitter}filetypes.json", "r")
+
+    data: str = "".join(file.read().split("\n"))
+    file.close()
+
+    result: Tuple[GeneratedEOFComments, IndentMapDict] = json.loads(data)
+
+    return result[0], result[1]
+
+
+_formats, _DEFAULT = import_json()
 
 
 class Comments():
@@ -230,5 +205,29 @@ def list_filetypes() -> NoReturn:
         txt.append(f"- {ext}: {indents}")
 
     die(*txt, code=0, sep="\n")
+
+
+def export_json() -> NoReturn:
+    """Export default vars to JSON."""
+    if not (exists("./vim_eof_comment/comments") and isdir("./vim_eof_comment/comments")):
+        return
+
+    try:
+        data: str = json.dumps((_formats, _DEFAULT), ensure_ascii=False)
+    except KeyboardInterrupt:
+        die(code=1)
+    except Exception:
+        raise RuntimeError("Data encoding failed!")
+
+    try:
+        file: TextIOWrapper = open(_JSON_FILE, "w")
+    except Exception:
+        die("Failed to write encoded data!", code=5)
+
+    if file.write(data + "\n") != len(data) + 1:
+        file.close()
+        raise IOError("Failed to write data properly!")
+
+    file.close()
 
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

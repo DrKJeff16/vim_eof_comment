@@ -12,6 +12,7 @@ typing-extensions = "*"
 pyproject = "*"
 colorama = "*"
 argcomplete = "*"
+python-magic = "*"
 
 [dev-packages]
 pynvim = "*"

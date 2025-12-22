@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires      = ["setuptools"]
+requires      = ["setuptools", "setuptools-scm>=8.0"]
 
 [project]
 authors = [{ name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com" }]
@@ -39,17 +39,16 @@ checks = [
     "EX01",
     "SA01",
 ]
-# remember to use single quotes for regex in TOML
-exclude = [ # don't report on objects that match any of these regex
+exclude = [
+    '\.undocumented_method$',
     '__call__$',
     '__dict__$',
     '__eq__$',
     '__init__$',
     '__repr__$',
     '__str__$',
-    '\.undocumented_method$',
 ]
-exclude_files = [ # don't process filepaths that match these regex
-    '^module/gui.*',
-    '^tests/.*',
-]
+exclude_files = ['^module/gui.*', '^tests/.*']
+
+[tool.setuptools.package-data]
+"*" = ["*.json"]
