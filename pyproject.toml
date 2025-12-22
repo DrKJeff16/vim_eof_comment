@@ -11,19 +11,30 @@ classifiers = [
     "Intended Audience :: End Users/Desktop",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python",
     "Topic :: Text Processing :: Filters",
     "Topic :: Utilities",
     "Typing :: Typed",
 ]
-dependencies = ["argcomplete", "argparse", "colorama", "setuptools", "typing", "wheel"]
+dependencies = [
+    "argcomplete",
+    "argparse",
+    "colorama",
+    "python-magic",
+    "setuptools",
+    "typing",
+    "wheel",
+]
 description = "Adds Vim EOF comments for given filetypes in given directories"
 license = "GPL-2.0-only"
 maintainers = [{ name = "Guennadi Maximov C", email = "g.maxc.fox@protonmail.com" }]
 name = "vim-eof-comment"
 readme = "README.md"
 requires-python = ">=3.10"
-version = "0.3.4"
+version = "0.3.5"
 
     [project.scripts]
     vim-eof-comment = "vim_eof_comment.eof:main"
@@ -34,10 +45,10 @@ version = "0.3.4"
 
 [tool.numpydoc_validation]
 checks = [
-    "all",  # report on all checks, except the below
     "ES01",
     "EX01",
     "SA01",
+    "all",  # report on all checks, except the below
 ]
 exclude = [
     '\.undocumented_method$',
