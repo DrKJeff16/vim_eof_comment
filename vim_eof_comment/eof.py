@@ -32,7 +32,7 @@ _RESET: int = Style.RESET_ALL
 def eof_comment_search(
     files: Dict[str, BatchPathDict],
     comments: Comments,
-    verbose: bool
+    **kwargs
 ) -> Dict[str, EOFCommentSearch]:
     """
     Search through opened files.
@@ -43,8 +43,8 @@ def eof_comment_search(
         A dictionary of ``str`` to ``BatchPathDict`` objects.
     comments : Comments
         The ``Comments`` object containing the hardcoded comments per file extension.
-    verbose : bool
-        Sets verbose mode.
+    **kwargs
+        COntains the ``verbose`` and ``newline`` boolean options.
 
     Returns
     -------
@@ -58,6 +58,9 @@ def eof_comment_search(
     vim_eof_comment.types.EOFCommentSearch
         The object type for the returning dictionary values.
     """
+    verbose: bool = kwargs.get("verbose", False)
+    newline: bool = kwargs.get("newline", False)
+
     result: Dict[str, EOFCommentSearch] = dict()
     comment_map = comments.generate()
 
@@ -72,7 +75,7 @@ def eof_comment_search(
         last_line, has_nwl = wrapper["line"], wrapper["has_nwl"]
 
         verbose_print(f"{_RESET} - {path} ==> ", verbose=verbose, end="", sep="")
-        if last_line != comment_map[ext]:
+        if last_line != comment_map[ext] or (newline and not has_nwl):
             verbose_print(f"{_BRIGHT}{_RED}CHANGED", verbose=verbose)
             result[path] = EOFCommentSearch(
                 state=IOWrapperBool(file=open(path, "r"), has_nwl=has_nwl),
@@ -162,7 +165,7 @@ def main() -> int:
     if len(files) == 0:
         die("No matching files found!", code=1)
 
-    results = eof_comment_search(files, comments, verbose)
+    results = eof_comment_search(files, comments, verbose=verbose, newline=newline)
     if len(results) > 0:
         append_eof_comment(results, comments, newline)
 

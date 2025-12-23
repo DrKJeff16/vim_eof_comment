@@ -34,7 +34,7 @@ def open_batch_paths(paths: list[BatchPairDict]) -> dict[str, BatchPathDict]:
     Dict[str, BatchPathDict]
         A ``str`` to ``BatchPathDict``` dictionary.
     """
-def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, newline: bool, has_nwl: bool, matching: bool) -> str:
+def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, **kwargs) -> str:
     """
     Modify a file containing a bad EOF comment.
 
@@ -46,13 +46,8 @@ def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, newline
         A filetype-to-comment dictionary.
     ext : str
         The filetype extension given by the user.
-    newline : bool
-        Flag to whether add a newline before the comment.
-    has_nwl : bool
-        Indicates whether the file already has a newline at the end
-        (not counting LF/CRLF line endings).
-    matching : bool
-        Indicates whether the file already has a matching EOF comment.
+    **kwargs
+        Contains the ``newline``, ``has_nwl`` and ``matching`` boolean attributes.
 
     Returns
     -------

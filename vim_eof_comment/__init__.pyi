@@ -11,4 +11,5 @@ from .version import version_info as version_info
 __all__ = ['args', 'comments', 'eof', 'file', 'main', 'regex', 'types', 'util', 'version', 'version_info']
 
 version: str
+
 # vim: set ts=4 sts=4 sw=4 et ai si sta:

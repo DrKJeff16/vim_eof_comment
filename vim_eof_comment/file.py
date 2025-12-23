@@ -78,14 +78,7 @@ def open_batch_paths(paths: List[BatchPairDict]) -> Dict[str, BatchPathDict]:
     return result
 
 
-def modify_file(
-    file: TextIOWrapper,
-    comments: Dict[str, str],
-    ext: str,
-    newline: bool,
-    has_nwl: bool,
-    matching: bool
-) -> str:
+def modify_file(file: TextIOWrapper, comments: Dict[str, str], ext: str, **kwargs) -> str:
     """
     Modify a file containing a bad EOF comment.
 
@@ -97,24 +90,23 @@ def modify_file(
         A filetype-to-comment dictionary.
     ext : str
         The filetype extension given by the user.
-    newline : bool
-        Flag to whether add a newline before the comment.
-    has_nwl : bool
-        Indicates whether the file already has a newline at the end
-        (not counting LF/CRLF line endings).
-    matching : bool
-        Indicates whether the file already has a matching EOF comment.
+    **kwargs
+        Contains the ``newline``, ``has_nwl`` and ``matching`` boolean attributes.
 
     Returns
     -------
     str
         The modified contents of the given file.
     """
+    has_nwl: bool = kwargs.get("has_nwl", False)
+    matching: bool = kwargs.get("matching", False)
+    newline: bool = kwargs.get("newline", False)
+
     data: List[str] = file.read().split("\n")
     file.close()
 
     data_len = len(data)
-    comment = comments[ext]
+    comment = comments[ext] if not (newline and not has_nwl) else f"\n{comments[ext]}"
     if data_len == 0:
         data = [comment, ""]
     elif data_len == 1:
@@ -127,9 +119,6 @@ def modify_file(
             data[-2] = comment
         else:
             data.insert(-1, comment)
-
-    if newline and not has_nwl:
-        data.insert(-2, "")  # Newline
 
     return "\n".join(data)
 
@@ -149,17 +138,16 @@ def get_last_line(file: TextIOWrapper) -> LineBool:
         An object containing both the last line in a string and a boolean indicating a newline.
     """
     data: List[str] = file.read().split("\n")
-    has_newline = False
-    line = ""
+    file.close()
+
+    has_newline, line = False, ""
     if len(data) == 1:
         line = data[0]
-    elif len(data) >= 2:
+    else:
         if len(data) >= 3:
             has_newline = data[-3] == ""
 
         line: str = data[-2]
-
-    file.close()
 
     return LineBool(line=line, has_nwl=has_newline)
 
