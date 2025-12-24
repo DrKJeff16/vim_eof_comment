@@ -157,6 +157,11 @@ def main() -> int:
     indent: List[IndentHandler] = indent_handler(ns.indent)
     verbose: bool = ns.verbose
 
+    dry_run: bool = ns.dry_run
+
+    if dry_run:
+        verbose = True
+
     indent = gen_indent_maps(indent.copy())
 
     comments = Comments(indent)
@@ -166,7 +171,7 @@ def main() -> int:
         die("No matching files found!", code=1)
 
     results = eof_comment_search(files, comments, verbose=verbose, newline=newline)
-    if len(results) > 0:
+    if len(results) > 0 and not dry_run:
         append_eof_comment(results, comments, newline)
 
     return 0

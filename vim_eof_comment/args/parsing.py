@@ -134,6 +134,16 @@ def arg_parser_init(prog: str = "vim-eof-comment") -> Tuple[ArgumentParser, Name
             "completer": None,
         },
         {
+            "opts": ["-D", "--dry-run"],
+            "kwargs": {
+                "required": False,
+                "action": "store_true",
+                "help": "Don't modify the files, but do execute the rest",
+                "dest": "dry_run",
+            },
+            "completer": None,
+        },
+        {
             "opts": ["-l", "--list-filetypes"],
             "kwargs": {
                 "required": False,
