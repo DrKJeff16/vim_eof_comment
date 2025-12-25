@@ -119,11 +119,12 @@ def modify_file(file: TextIOWrapper, comments: Dict[str, str], ext: str, **kwarg
         else:
             data.insert(-1, comment)
 
-    if newline and data[-3] != "":
-        data.insert(-2, "")
+    if len(data) >= 3:
+        if newline and data[-3] != "":
+            data.insert(-2, "")
 
-    if not newline and data[-3] == "":
-        data.pop(-3)
+        if not newline and data[-3] == "":
+            data.pop(-3)
 
     return "\n".join(data)
 
