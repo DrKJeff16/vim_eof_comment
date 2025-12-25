@@ -22,7 +22,7 @@ repos:
         name: Lint Script
         language: system
         types: [python]
-        files: ^(vim_eof_comment/.*\.py|Makefile)$
+        files: ^(vim_eof_comment/.*\.pyi?|Makefile)$
         entry: make lint
         verbose: true
       - id: run_script
