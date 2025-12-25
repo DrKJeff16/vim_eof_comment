@@ -62,7 +62,7 @@ exclude = [
 exclude_files = ['^module/gui.*', '^tests/.*']
 
 [tool.setuptools.package-data]
-"*" = ["*.json"]
+"vim_eof_comment" = ["*.json", "*.py", "*.pyi"]
 
 [tool.mypy]
 exclude_gitignore      = true
