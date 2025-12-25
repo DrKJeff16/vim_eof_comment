@@ -167,7 +167,8 @@ def main() -> int:
 
     files = open_batch_paths(bootstrap_paths(dirs, exts))
     if len(files) == 0:
-        die("No matching files found!", code=1)
+        code = 1 if not dry_run else 0
+        die("No matching files found!", code=code)
 
     results = eof_comment_search(files, comments, verbose=verbose, newline=newline)
     if len(results) > 0 and not dry_run:
