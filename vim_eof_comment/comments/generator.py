@@ -81,7 +81,7 @@ class Comments():
 
     def __init__(self, mappings: IndentMapDict | None = None):
         """
-        Creates a new Vim EOF comment object.
+        Create a new Vim EOF comment object.
 
         Parameters
         ----------

@@ -7,8 +7,7 @@ Copyright (c) 2025 Guennadi Maximov C. All Rights Reserved.
 """
 __all__ = ["gen_parser_specs", "bootstrap_args", "arg_parser_init", "indent_handler"]
 
-from argparse import (ArgumentDefaultsHelpFormatter, ArgumentError,
-                      ArgumentParser, Namespace)
+from argparse import ArgumentDefaultsHelpFormatter, ArgumentError, ArgumentParser, Namespace
 from typing import List, Tuple
 
 from argcomplete.completers import DirectoriesCompleter

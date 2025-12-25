@@ -40,12 +40,14 @@ lint:
 	@flake8 --statistics --show-source --color=always --max-line-length=100 --ignore=D401 \
 		--per-file-ignores=__init__.py:F401 \
 		--exclude .tox,.git,*staticfiles*,build,locale,docs,tools,venv,.venv,*migrations*,*.pyc,*.pyi,__pycache__,test_*.py \
-		.
+		vim_eof_comment
+	@pydocstyle --convention=numpy --match='.*\.py' vim_eof_comment
+	@autopep8 --aggressive --aggressive --aggressive --in-place --recursive vim_eof_comment
 	@echo -e "\nDone!"
 
 stubs: lint
 	@echo -e "Generating stubs...\n"
-	@stubgen --include-docstrings --include-private -p vim_eof_comment -o .
+	@stubgen --include-docstrings --include-private -v -p vim_eof_comment -o .
 	@echo -e "\nDone!"
 	@echo -e "\nRunning isort...\n"
 	@isort vim_eof_comment

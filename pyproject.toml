@@ -63,3 +63,27 @@ exclude_files = ['^module/gui.*', '^tests/.*']
 
 [tool.setuptools.package-data]
 "*" = ["*.json"]
+
+[tool.mypy]
+exclude_gitignore      = true
+follow_untyped_imports = true
+python_version         = "3.13"
+warn_return_any        = true
+warn_unused_configs    = true
+
+[tool.pydocstyle]
+convention = "numpy"
+match      = ".*\\.py"
+verbose    = true
+
+[tool.autopep8]
+aggressive      = 3
+in-place        = true
+max_line_length = 100
+recursive       = true
+verbose         = true
+
+[tool.isort]
+line_length = 100
+skip_glob = ["docs/*"]
+skip_gitignore = true
