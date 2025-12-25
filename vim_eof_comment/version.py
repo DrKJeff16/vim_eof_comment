@@ -14,7 +14,7 @@ from .util import die
 
 class VersionInfo():
     """
-    A sys-inspired version_info object type.
+    A ``sys.version_info``-like object type.
 
     Parameters
     ----------
@@ -109,7 +109,7 @@ class VersionInfo():
         Multiple definitions in constructor.
 
         >>> from vim_eof_comment.version import VersionInfo
-        >>> print(VersionInfo([(0, 0, 1), (0, 0, 2)]))
+        >>> print(repr(VersionInfo([(0, 0, 1), (0, 0, 2)])))
         0.0.2
         """
         return self.__str__()
