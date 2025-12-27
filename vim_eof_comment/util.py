@@ -161,7 +161,7 @@ def gen_indent_maps(maps: List[IndentHandler]) -> Dict[str, IndentMap] | None:
         if mapping_len <= 1:
             raise ValueError(f"One of the custom mappings is not formatted properly! (`{mapping}`)")
 
-        ext, level = mapping["ext"], mapping["level"]
+        ext, level = mapping["ft_ext"], mapping["level"]
         if ext in map_d.keys():
             continue
 

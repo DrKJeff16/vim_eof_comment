@@ -45,7 +45,7 @@ def modify_file(file: TextIOWrapper, comments: dict[str, str], ext: str, **kwarg
     comments : Dict[str, str]
         A filetype-to-comment dictionary.
     ext : str
-        The filetype extension given by the user.
+        The file-type/file-extension given by the user.
     **kwargs
         Contains the ``newline``, and ``matching`` boolean attributes.
 

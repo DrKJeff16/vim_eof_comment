@@ -1,19 +1,19 @@
 from typing import Iterator, NoReturn
 
-from .types import GeneratedEOFComments, IndentMapDict
+from ..types import IndentMap
 
 __all__ = ['Comments', 'export_json', 'import_json', 'list_filetypes']
 
-def import_json() -> tuple[GeneratedEOFComments, IndentMapDict]:
+def import_json() -> tuple[dict[str, str], dict[str, IndentMap]]:
     """
     Import default vars from JSON file.
 
     Returns
     -------
-    comments : GeneratedEOFComments
-        The default ``GeneratedEOFComments``.
-    map_dict : IndentMapDict
-        The default ``IndentMapDict``.
+    comments : Dict[str, str]
+        The default ``Dict[str, str]``.
+    map_dict : Dict[str, IndentMap]
+        The default indent mappings dict.
     """
 
 class Comments:
@@ -22,18 +22,18 @@ class Comments:
 
     Parameters
     ----------
-    mappings : IndentMapDict, optional, default=None
+    mappings : Dict[str, IndentMap], optional, default=None
         The ``str`` to ``IndentMap`` dictionary.
 
     Attributes
     ----------
-    __DEFAULT : IndentMapDict
+    __DEFAULT : Dict[str, IndentMap]
         The default/fallback alternative to ``langs``.
-    __formats : GeneratedEOFComments
+    __formats : Dict[str, str]
         The default/fallback alternative to ``comments``.
-    langs : IndentMapDict
+    langs : Dict[str, IndentMap]
         A dictionary of ``IndentMap`` type objects.
-    comments : GeneratedEOFComments
+    comments : Dict[str, str]
         A dictionary of file-extension-to-EOF-comment mappings.
 
     Methods
@@ -42,17 +42,17 @@ class Comments:
     __fill_langs(langs)
     get_defaults()
     """
-    __DEFAULT: IndentMapDict
-    __formats: GeneratedEOFComments
-    comments: GeneratedEOFComments
-    langs: IndentMapDict
-    def __init__(self, mappings: IndentMapDict | None = None) -> None:
+    __DEFAULT: dict[str, IndentMap]
+    __formats: dict[str, str]
+    comments: dict[str, str]
+    langs: dict[str, IndentMap]
+    def __init__(self, mappings: dict[str, IndentMap] | None = None) -> None:
         """
         Create a new Vim EOF comment object.
 
         Parameters
         ----------
-        mappings : IndentMapDict, optional, default=None
+        mappings : Dict[str, IndentMap], optional, default=None
             The ``str`` to ``IndentMap`` dictionary.
         """
     def __iter__(self) -> Iterator[str]:
@@ -71,31 +71,31 @@ class Comments:
         bool
             Represents whether the file extension has been included in the defaults.
         """
-    def __fill_langs(self, langs: IndentMapDict) -> NoReturn:
+    def __fill_langs(self, langs: dict[str, IndentMap]) -> NoReturn:
         """
         Fill languages dict.
 
         Parameters
         ----------
-        langs : IndentMapDict
+        langs : Dict[str, IndentMap]
             A dictionary of ``IndentMap`` type objects.
         """
-    def get_defaults(self) -> IndentMapDict:
+    def get_defaults(self) -> dict[str, IndentMap]:
         """
         Retrieve the default comment dictionary.
 
         Returns
         -------
-        IndentMapDict
+        Dict[str, IndentMap]
             A dictionary of ``IndentMap`` type objects.
         """
-    def generate(self) -> GeneratedEOFComments:
+    def generate(self) -> dict[str, str]:
         """
         Generate the comments list.
 
         Returns
         -------
-        GeneratedEOFComments
+        Dict[str, str]
             The customly generated comments dictionary.
         """
     def get_ft(self, ext: str) -> str | None:

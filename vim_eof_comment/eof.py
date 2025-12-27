@@ -41,7 +41,7 @@ def eof_comment_search(
     files : Dict[str, BatchPathDict]
         A dictionary of ``str`` to ``BatchPathDict`` objects.
     comments : Comments
-        The ``Comments`` object containing the hardcoded comments per file extension.
+        The ``Comments`` object containing the hardcoded comments per file-type/file-extension.
     **kwargs
         COntains the ``verbose`` and ``newline`` boolean options.
 
@@ -68,7 +68,7 @@ def eof_comment_search(
     verbose_print(f"{_RESET}Analyzing files...\n", verbose=verbose)
     for path, file in files.items():
         file_obj: TextIOWrapper = file["file"]
-        ext: str = file["ext"]
+        ext: str = file["ft_ext"]
 
         wrapper = get_last_line(file_obj)
         last_line, has_nwl = wrapper["line"], wrapper["has_nwl"]
@@ -161,15 +161,12 @@ def main() -> int:
     if dry_run:
         verbose = True
 
-    indent = gen_indent_maps(indent.copy())
-
-    comments = Comments(indent)
-
     files = open_batch_paths(bootstrap_paths(dirs, exts))
     if len(files) == 0:
         code = 1 if not dry_run else 0
         die("No matching files found!", code=code)
 
+    comments = Comments(gen_indent_maps(indent.copy()))
     results = eof_comment_search(files, comments, verbose=verbose, newline=newline)
     if len(results) > 0 and not dry_run:
         append_eof_comment(results, comments, newline)

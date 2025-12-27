@@ -44,7 +44,7 @@ def bootstrap_paths(paths: List[str], exts: List[str]) -> List[BatchPairDict]:
                     if not file.endswith(ext):
                         continue
 
-                    result.append(BatchPairDict(fpath=join(root, file), ext=ext))
+                    result.append(BatchPairDict(fpath=join(root, file), ft_ext=ext))
 
     return result
 
@@ -65,9 +65,9 @@ def open_batch_paths(paths: List[BatchPairDict]) -> Dict[str, BatchPathDict]:
     """
     result = dict()
     for path in paths:
-        fpath, ext = path["fpath"], path["ext"]
+        fpath, ext = path["fpath"], path["ft_ext"]
         try:
-            result[fpath] = {"file": open(fpath, "r"), "ext": ext}
+            result[fpath] = {"file": open(fpath, "r"), "ft_ext": ext}
         except KeyboardInterrupt:
             die("\nProgram interrupted!", code=1)  # Kills the program
         except FileNotFoundError:
@@ -89,7 +89,7 @@ def modify_file(file: TextIOWrapper, comments: Dict[str, str], ext: str, **kwarg
     comments : Dict[str, str]
         A filetype-to-comment dictionary.
     ext : str
-        The filetype extension given by the user.
+        The file-type/file-extension given by the user.
     **kwargs
         Contains the ``newline``, and ``matching`` boolean attributes.
 

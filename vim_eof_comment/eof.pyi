@@ -14,7 +14,7 @@ def eof_comment_search(files: dict[str, BatchPathDict], comments: Comments, **kw
     files : Dict[str, BatchPathDict]
         A dictionary of ``str`` to ``BatchPathDict`` objects.
     comments : Comments
-        The ``Comments`` object containing the hardcoded comments per file extension.
+        The ``Comments`` object containing the hardcoded comments per file-type/file-extension.
     **kwargs
         COntains the ``verbose`` and ``newline`` boolean options.
 

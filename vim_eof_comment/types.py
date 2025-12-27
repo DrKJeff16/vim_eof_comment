@@ -67,19 +67,19 @@ class IndentMap(TypedDict):
 
 class IndentHandler(TypedDict):
     """
-    A dict containing ``ext``, ``level`` and ``expandtab`` as keys.
+    A dict containing ``ft_ext``, ``level`` and ``expandtab`` as keys.
 
     Attributes
     ----------
-    ext : str
-        The file extension.
+    ft_ext : str
+        The file-extension/file-type.
     level : str
         The string representation of the indent level.
     expandtab : bool
         Whether to expand tabs or not.
     """
 
-    ext: str
+    ft_ext: str
     level: str
     expandtab: bool
 
@@ -102,14 +102,14 @@ class BatchPathDict(TypedDict):
     """A ``TypedDict`` container."""
 
     file: TextIO
-    ext: str
+    ft_ext: str
 
 
 class BatchPairDict(TypedDict):
     """A ``TypedDict`` container."""
 
     fpath: str
-    ext: str
+    ft_ext: str
 
 
 class EOFCommentSearch(TypedDict):
